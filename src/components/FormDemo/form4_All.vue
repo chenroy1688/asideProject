@@ -55,17 +55,21 @@
                         <img class="chkIcon" v-lazy="imgSrc"/>
                     </div>
 
+                    <div class="loading bosss">
+                        <img :src="loadImg">
+                        <p>{{ imgCount }}%</p>
+                    </div>
             </div>
    </div><!-- end of pc_wrap -->
 </template>
 
 <script>
+//共用组件
+import LazyLoad from '@/components/share_components/lazyData'
 //引入Vuex
 import { mapState,mapGetters,mapMutations,mapActions } from 'vuex'
 //引入封装api接口
 import { apiAddress } from '@/api/api' 
-//共用组件
-import LazyLoad from '@/components/share_components/lazyData'
 
 export default {
     components:{
@@ -75,13 +79,19 @@ export default {
        return{
             show:false,
             inputVal:'', //v-model绑定
+            loadImg:'../static/icons/loading.gif',
             imgSrc:'../static/img/lazyImg.jpg',
             testImg :'static/img/pippen.jpg',
             delView:{ //删除弹层 chk
                jmp:false, 
                chkDel:1 //谭层及删除值
             },
-            lazyData:[]
+            lazyData:[],
+            imgArr:[
+                require("../../assets/image/pippen.jpg"),
+                require("../../assets/image/slam.jpg"),
+            ],
+            imgCount: 0
        }
    }, 
    computed:{ //计算属性
@@ -98,34 +108,44 @@ export default {
             .then(res => {
                 _this.lazyData = res.data
             })
+        },
+        loading(){
+            var imgArr = this.imgArr;
+            var imgCount = this.imgCount;
+
+            for(let img of imgArr){
+                console.log('imgggg',img);
+                let image = new Image();
+                image.src = img;
+
+                image.onload = () => {
+                    console.log('加載')
+                    imgCount++;
+                    //计算图片加载的百分比,绑定到percent变量
+                    this.imgCount = parseInt((imgCount / imgArr.length) * 100);
+                    //加载完成后出现page
+                    if(imgCount == imgArr.length){
+                        this.$router.push('/FormFour_All'); //跳转至/FormFour_All
+                    }
+                }
+            }
         }
    },
    mounted(){ //DOM载入完成调用
      this.getLists()
+     this.loading()
    }
 }
 </script>
 
 <style scoped lang="scss">
-.testImg,
-.chkIcon{
-    margin-top:30px;
+.loading p{
+    text-align:center;
+    font-size:24px;
+
 }
 .demo p{
     margin:80px 0;
-}
-
-.img-box{
-    //loading图片大小
-    img[lazy="loading"] {
-        width:400px;
-        border:1px solid #0000ff;
-    }
-    //实际图片大小
-    img[lazy="loaded"] {
-        width:600px;
-        border:1px solid #ff0000;
-    }
 }
 
 

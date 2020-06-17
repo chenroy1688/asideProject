@@ -146,6 +146,22 @@ input{
 ul,li { margin: 0; padding: 0; list-style: none; }
 *:before, *:after { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 
+/* 图片 懒加载设定 ---------------------------------------------- */
+.img-box{
+  //loading图片大小
+  img[lazy="loading"] {
+      width:500px;
+      height:auto;
+      margin-top:30px;
+  }
+  //实际图片大小
+  img[lazy="loaded"] {
+      width:600px;
+      height:auto;
+      margin-top:30px;
+  }
+}
+
 /* 按鈕作用 ---------------------------------------------- */
 .isActive{
   background-color:#d81e2b !important;

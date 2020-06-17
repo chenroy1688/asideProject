@@ -17,8 +17,8 @@ import RightMenu from '../components/RightMenu.vue' //右边体育新闻选单�
 // import portFolio from '../components/portfolio.vue'
 //赛事预测 
 // import Forecast from '@/components/forecast.vue' 
-//功能實作 标签分页
-// import AboutIndex from '@/components/aboutUs/index.vue'
+//关于我们 标签分页
+import AboutIndex from '@/components/aboutUs/index.vue'
 //联系我们
 // import Product from '../components/products/index.vue'
 //实现todolist功能
@@ -48,9 +48,9 @@ import OrderingGuide from '../components/products/OrderingGuide.vue' //点餐文
 import Deilvery from '../components/products/Deilvery.vue' //快递讯息
 
 //二級路由 ( 功能实作 )
-// import AboutUs from '../components/aboutUs/AboutUs.vue'
-// import Before from '../components/aboutUs/before.vue'
-// import HisPage from '../components/aboutUs/HisPage.vue'
+import AboutUs from '../components/aboutUs/AboutUs.vue'
+import Before from '../components/aboutUs/before.vue'
+import HisPage from '../components/aboutUs/HisPage.vue'
 
 //三级路由 ( 联系我们 )  --------------------------------------
 import Phone from '../components/products/third/Phone.vue' //电话
@@ -84,7 +84,7 @@ export const routes = [
   { //赛事直播
     path:'/gamePlay', 
     components: {
-      default : resolve => require(['@/components/gamePlay'],resolve), //懒加载路由写法
+      default : resolve => require(['@/components/gamePlay'],resolve),
       rightmenu:RightMenu, //右侧_新闻区
       leftAside:AsidePage, //左侧下拉选单
       header: Header,
@@ -99,7 +99,7 @@ export const routes = [
   { //最新讯息
     path:'/portFolio',
     components: {
-      default : () => import('../components/portfolio.vue'), 
+      default : resolve => require(['@/components/portfolio'],resolve), 
       rightmenu:RightMenu, //右侧_新闻区
       leftAside:AsidePage, //左侧下拉选单
       header: Header,
@@ -114,7 +114,7 @@ export const routes = [
   {//赛事预测
     path:'/forecast',
     components:{
-      default : () => import('../components/forecast.vue'),
+      default : resolve => require(['@/components/forecast'],resolve), 
       rightmenu:RightMenu, //右侧 新闻区
       leftAside:AsidePage, //左侧下拉选单
       header:Header,
@@ -130,8 +130,8 @@ export const routes = [
     path:'/aboutUs',  //网址路径
     name:'AboutUs',
     redirect:'/aboutUs/AboutUs', //预设载入page
-    components:{
-      default:() => import('@/components/aboutUs/index.vue'), //载入容器页
+    components:{ 
+      default : resolve => require(['@/components/aboutUs/index'],resolve),//载入容器页
       rightmenu:RightMenu, //右侧 新闻区
       leftAside:AsidePage, //左侧下拉选单
       header:Header,
@@ -141,9 +141,9 @@ export const routes = [
     },
     children:[ //二级路由设定
       {
-        path:'/AboutUs',
+        path:'/aboutUs',
         name:'aboutLink',
-        component:() => import('../components/aboutUs/AboutUs.vue'),
+        component : resolve => require(['@/components/aboutUs/AboutUs'],resolve), 
         meta:{
           title:'关于音速分页title'
         }
@@ -151,7 +151,7 @@ export const routes = [
       {
         path:'/before',
         name:'beforeLink',
-        component:() => import('../components/aboutUs/before.vue'),
+        component : resolve => require(['@/components/aboutUs/before'],resolve), 
         meta:{
           title:'历史沿革分页title'
         }
@@ -159,7 +159,7 @@ export const routes = [
       {
         path:'/HisPage',
         name:'serverLink',
-        component:() => import('../components/aboutUs/HisPage.vue'),
+        component : resolve => require(['@/components/aboutUs/HisPage'],resolve),
         meta:{
           title:'体育服务分页title'
         }
@@ -170,7 +170,7 @@ export const routes = [
     path:'/products', //容器为products/index.vue
     redirect:'/products/Contact', //预设展示的页面
     components: {
-      default : () => import('../components/products/index.vue'), 
+      default : resolve => require(['@/components/products/index'],resolve),
       rightmenu:RightMenu, //右侧_新闻区
       leftAside:AsidePage, //左侧下拉选单
       header: Header,
@@ -234,7 +234,7 @@ export const routes = [
   { //表格功能1
     path:'/formOne', 
     components:{
-      default: () => import('@/components/aside/formOne.vue'), 
+      default : resolve => require(['@/components/aside/formOne'],resolve),
       rightmenu:RightMenu, //右侧 新闻区
       leftAside:AsidePage, //左侧下拉选单
       header:Header,
@@ -249,7 +249,7 @@ export const routes = [
   { //表格功能2
     path:'/formTwo', 
     components:{
-      default:() => import('@/components/aside/formTwo.vue'),
+      default : resolve => require(['@/components/aside/formTwo'],resolve),
       rightmenu:RightMenu, //右侧 新闻区
       leftAside:AsidePage, //左侧下拉选单
       header:Header,
@@ -264,7 +264,7 @@ export const routes = [
   { //备忘录功能 (分页02 -- 备忘录计划表todoList)
     path:'/todoList',
     components:{
-      default : () => import('@/components/TodoList/TodoList.vue'),
+      default : resolve => require(['@/components/TodoList/TodoList'],resolve),
       rightmenu:RightMenu, //右侧 新闻区
       leftAside:AsidePage, //左侧下拉选单
       header:Header,
@@ -279,7 +279,7 @@ export const routes = [
   { //表单功能 (分页01 -- 前后数据交互,实现全选功能)
     path:'/FormOne_All',
     components:{
-      default : () => import('@/components/FormDemo/form1_All.vue'),
+      default : resolve => require(['@/components/FormDemo/form1_All'],resolve),
       rightmenu:RightMenu,
       leftAside:AsidePage,
       header:Header,
@@ -294,7 +294,7 @@ export const routes = [
   { //表单功能 (分页02 -- 分页功能)
     path:'/FormTwo_All',
     components:{
-      default : () => import('@/components/FormDemo/form2_All.vue'),
+      default : resolve => require(['@/components/FormDemo/form2_All'],resolve),
       rightmenu:RightMenu,
       leftAside:AsidePage,
       header:Header,
@@ -309,7 +309,7 @@ export const routes = [
   { //表单功能 (分页03 -- 增删改查功能)
     path:'/FormThree_All',
     components:{
-      default : () => import('@/components/FormDemo/form3_All.vue'),
+      default : resolve => require(['@/components/FormDemo/form3_All'],resolve),
       rightmenu:RightMenu,
       leftAside:AsidePage,
       header:Header,
@@ -324,7 +324,7 @@ export const routes = [
   { //表单功能 (分页04 -- 实现懒加载功能)
     path:'/FormFour_All',
     components:{
-      default : () => import('@/components/FormDemo/form4_All.vue'),
+      default : resolve => require(['@/components/FormDemo/form4_All'],resolve),
       rightmenu:RightMenu,
       leftAside:AsidePage,
       header:Header,
