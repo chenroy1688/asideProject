@@ -18,7 +18,7 @@
                                     <h1 class="topic">
                                         <span class="icon-display"></span>
                                         表单实现懒加载功能<br>
-                                        图片懒加载
+                                        图片懒加载 -- 做個小冊視 明天看一下
                                     </h1>
                                 </el-col>
                                 <el-col :span="16" class="el-div topic_info">
