@@ -12,4 +12,5 @@ export const gamePlayApi = () => get('https://jsonplaceholder.typicode.com/users
 //最新信习
 export const userList = () => get('https://jsonplaceholder.typicode.com/users');
 //form4_All 懒加载数据接口 get请求
-export const apiAddress = () => get('https://jsonplaceholder.typicode.com/posts/1/comments');
+// export const apiAddress = () => get('https://jsonplaceholder.typicode.com/posts/1/comments');
+export const LazyLoadApi = () => get('http://jsonplaceholder.typicode.com/posts');

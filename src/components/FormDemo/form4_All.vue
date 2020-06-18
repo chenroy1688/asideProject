@@ -4,7 +4,7 @@
                 <!-- 主标题 -->
                     <el-row>
                         <el-col :span="24" class="contnet_main_topic topicOne NumberPosition1">
-                            <span>懒加载</span>
+                            <span>懒加载(点极)</span>
                             <span>Lazy Load</span>
                         </el-col>
                     </el-row>
@@ -18,7 +18,7 @@
                                     <h1 class="topic">
                                         <span class="icon-display"></span>
                                         表单实现懒加载功能<br>
-                                        图片懒加载 -- 做個小冊視 明天看一下
+                                        图片懒加载
                                     </h1>
                                 </el-col>
                                 <el-col :span="16" class="el-div topic_info">
@@ -32,33 +32,23 @@
                     </el-row>
 
                     <el-row>
-                        <!-- 数据组件 -->
-                        <LazyLoad></LazyLoad>
-                        <div>
-                            {{ lazyData }}
-                        </div>
+                        <!-- 懒加载 数据组件 -->
+                        <LazyLoad :lazyData = lazyData></LazyLoad>
                         <!-- 按钮 -->
                         <el-col :span="24">
                             <button >更新数据</button>
                         </el-col>
                     </el-row>
 
-                    <!-- <img :src="testImg" class="testImg"/> -->
-                    <div class="demo">
-                        <p>更新数据更新数据更新数据更新数据更新数据更新数据</p>
-                        <p>更新数据更新数据更新数据更新数据更新数据更新数据</p>
-                        <p>更新数据更新数据更新数据更新数据更新数据更新数据</p>
-                        <p>更新数据更新数据更新数据更新数据更新数据更新数据</p>
-                    </div>
                     <!-- 图片 懒加载 载不到图片则载入err.gif -->
                     <div class="img-box">
                         <img class="chkIcon" v-lazy="imgSrc"/>
                     </div>
 
-                    <div class="loading bosss">
+                    <!-- <div class="loading bosss">
                         <img :src="loadImg">
                         <p>{{ imgCount }}%</p>
-                    </div>
+                    </div> -->
             </div>
    </div><!-- end of pc_wrap -->
 </template>
@@ -69,7 +59,7 @@ import LazyLoad from '@/components/share_components/lazyData'
 //引入Vuex
 import { mapState,mapGetters,mapMutations,mapActions } from 'vuex'
 //引入封装api接口
-import { apiAddress } from '@/api/api' 
+import { LazyLoadApi } from '@/api/api' 
 
 export default {
     components:{
@@ -81,16 +71,15 @@ export default {
             inputVal:'', //v-model绑定
             loadImg:'../static/icons/loading.gif',
             imgSrc:'../static/img/lazyImg.jpg',
-            testImg :'static/img/pippen.jpg',
             delView:{ //删除弹层 chk
                jmp:false, 
                chkDel:1 //谭层及删除值
             },
             lazyData:[],
-            imgArr:[
-                require("../../assets/image/pippen.jpg"),
-                require("../../assets/image/slam.jpg"),
-            ],
+            // imgArr:[
+            //     require("../../assets/image/pippen.jpg"),
+            //     require("../../assets/image/slam.jpg"),
+            // ],
             imgCount: 0
        }
    }, 
@@ -104,7 +93,7 @@ export default {
         var _this = this; //改变this指向
 
         //请求api jsonplaceholder数据
-        apiAddress()
+        LazyLoadApi()
             .then(res => {
                 _this.lazyData = res.data
             })
@@ -133,7 +122,7 @@ export default {
    },
    mounted(){ //DOM载入完成调用
      this.getLists()
-     this.loading()
+    //  this.loading()
    }
 }
 </script>
@@ -142,7 +131,6 @@ export default {
 .loading p{
     text-align:center;
     font-size:24px;
-
 }
 .demo p{
     margin:80px 0;

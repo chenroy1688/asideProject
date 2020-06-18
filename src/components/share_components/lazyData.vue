@@ -3,7 +3,9 @@
             <div class="">
                     <!-- 数据区 -->
                     <el-row>
-                        <el-col :span="24" class="el_div">list</el-col>
+                        <el-col :span="24" class="el_div">
+                            {{ lazyData }}
+                        </el-col>
                     </el-row>
             </div>
    </div><!-- end of pc_wrap -->
@@ -15,6 +17,11 @@ import { mapState,mapGetters,mapMutations,mapActions } from 'vuex'
 export default {
     components:{
 
+    },
+    props:{
+        lazyData:{
+            type:Array,
+        }
     },
    data(){
        return{

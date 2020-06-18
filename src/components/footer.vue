@@ -1,5 +1,5 @@
 <template>
-    <footer v-model="footInfo" :zip-code.sync="zipCode" :class="['foot',{'foot_bg':footerStyle.bg}]">
+    <footer :zip-code.sync="zipCode" :class="['foot',{'foot_bg':footerStyle.bg}]">
         <!-- 底部 QRcode 主选项 -->
         <div class="foot_mainInfo">
             <div class="foot_logo">

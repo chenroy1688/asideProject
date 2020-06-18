@@ -49,6 +49,7 @@ Vue.use(VueLazyload,{
 // axios.defaults.baseURL = 'localhost:8080'
 Vue.prototype.$http = axios
 
+//创建路由设置
 const router = new Router({
   routes,
   mode: 'history'
