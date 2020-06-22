@@ -25,37 +25,6 @@
                             <el-menu-item :index="sub.componentName" v-text="sub.name"></el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
-
-                    <!-- <el-submenu index="1">
-                        <template slot="title">
-                            <i class="el-icon-location"></i>
-                            <span>主要菜单A</span>
-                        </template>
-
-                        <el-menu-item-group>
-                            <el-menu-item index="1-1">
-                                <router-link to="/BasicLayout">BasicLayout</router-link>
-                            </el-menu-item>
-                            <el-menu-item index="1-2">
-                                <router-link to="/BasicContainer">BasicContainer</router-link>
-                            </el-menu-item>
-                        </el-menu-item-group>
-                    </el-submenu>
-
-                    <el-submenu index="2">
-                        <template slot="title">
-                            <i class="el-icon-location"></i>
-                            <span>主要菜单B</span>
-                        </template>
-                        <el-menu-item-group>
-                            <el-menu-item index="2-1">
-                                <router-link to="/FormRadio">FormRadio</router-link>
-                            </el-menu-item>
-                            <el-menu-item index="2-2">
-                                <router-link to="/FormCheckbox">FormCheckbox</router-link>
-                            </el-menu-item>
-                        </el-menu-item-group>
-                    </el-submenu> -->
                 </el-menu>
         </el-col>
     </el-row>

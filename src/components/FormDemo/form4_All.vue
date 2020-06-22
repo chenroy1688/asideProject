@@ -4,7 +4,7 @@
                 <!-- 主标题 -->
                     <el-row>
                         <el-col :span="24" class="contnet_main_topic topicOne NumberPosition1">
-                            <span>懒加载(点极)</span>
+                            <span>懒加载(点击加载更多数据)</span>
                             <span>Lazy Load</span>
                         </el-col>
                     </el-row>
@@ -17,8 +17,7 @@
                                 <el-col :span="8" class="el-div">
                                     <h1 class="topic">
                                         <span class="icon-display"></span>
-                                        表单实现懒加载功能<br>
-                                        图片懒加载
+                                        懒加载功能
                                     </h1>
                                 </el-col>
                                 <el-col :span="16" class="el-div topic_info">
@@ -30,14 +29,9 @@
                             </el-row>
                         </el-col>
                     </el-row>
-
+                    <!-- 懒加载 数据组件 -->
                     <el-row>
-                        <!-- 懒加载 数据组件 -->
-                        <LazyLoad :lazyData = lazyData></LazyLoad>
-                        <!-- 按钮 -->
-                        <el-col :span="24">
-                            <button >更新数据</button>
-                        </el-col>
+                        <LazyLoad></LazyLoad>
                     </el-row>
 
                     <!-- 图片 懒加载 载不到图片则载入err.gif -->
@@ -89,15 +83,6 @@ export default {
         )
    },
    methods:{
-      getLists(){
-        var _this = this; //改变this指向
-
-        //请求api jsonplaceholder数据
-        LazyLoadApi()
-            .then(res => {
-                _this.lazyData = res.data
-            })
-        },
         loading(){
             var imgArr = this.imgArr;
             var imgCount = this.imgCount;
@@ -121,8 +106,6 @@ export default {
         }
    },
    mounted(){ //DOM载入完成调用
-     this.getLists()
-    //  this.loading()
    }
 }
 </script>
@@ -134,34 +117,5 @@ export default {
 }
 .demo p{
     margin:80px 0;
-}
-
-
-.fade-enter-active,.fade-leave-active{
-    transition:opacity .5s;
-}
-.fade-enter, .fade-leave-to{
-    opacity:0
-}
-
-.isComplete{
-    font-size:18px;
-    padding:20px 0 40px 0;
-    text-align:center;
-}
-.el_div{
-    span.topic{
-        display:block;
-        font-size:14px;
-        padding:10px 0;
-    }
-    > .el-input{ 
-        /deep/ .el-input__inner{ //深层作用选择器更改scss设定
-            width:200px;
-            color:#fff;
-            border:1px solid #999;
-            background-color:#333;
-        }
-    }
 }
 </style>

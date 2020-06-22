@@ -45,6 +45,8 @@ $auto:0 auto;
 $num:15px;
 $lineHeight:25px;
 
+$marginTop:var(--main-margin30) 0;
+
 /* total 共用设定 ---------------------------------------------- */
 :root{
   /* text color setting */
@@ -99,6 +101,23 @@ html, body { min-height: 100%;}
 .el_div{
   padding:20px;
   border:$lineGray;
+  span.topic{
+    display:block;
+    font-size:14px;
+    padding:10px 0;
+  }
+  > .el-input{ 
+      /deep/ .el-input__inner{ //深层作用选择器更改scss设定
+          width:200px;
+          color:#fff;
+          border:1px solid #999;
+          background-color:#333;
+      }
+  }
+  h3{
+    font-size:18px;
+    padding:0 0 30px 0;
+  }
 }
 .el_div_noBor{
   padding:20px;
@@ -160,6 +179,32 @@ ul,li { margin: 0; padding: 0; list-style: none; }
       height:auto;
       margin-top:30px;
   }
+}
+
+.marTop{
+  margin:$marginTop 0;
+}
+
+.noMoreData{
+  font-size:16px;
+  font-weight: 600;
+  color:#ff0000;
+  padding:35px 0;
+  text-align:center;
+  border:1px solid #999;
+}
+
+.isComplete{
+  font-size:18px;
+  padding:20px 0 40px 0;
+  text-align:center;
+}
+
+.fade-enter-active,.fade-leave-active{
+  transition:opacity .5s;
+}
+.fade-enter, .fade-leave-to{
+  opacity:0
 }
 
 /* 按鈕作用 ---------------------------------------------- */

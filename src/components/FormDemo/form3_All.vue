@@ -197,37 +197,11 @@ export default {
        }
    },
    mounted(){ //DOM载入完成调用
-    //  this.getLists()
+    
    }
 }
 </script>
 
 <style scoped lang="scss">
-.fade-enter-active,.fade-leave-active{
-    transition:opacity .5s;
-}
-.fade-enter, .fade-leave-to{
-    opacity:0
-}
 
-.isComplete{
-    font-size:18px;
-    padding:20px 0 40px 0;
-    text-align:center;
-}
-.el_div{
-    span.topic{
-        display:block;
-        font-size:14px;
-        padding:10px 0;
-    }
-    > .el-input{ 
-        /deep/ .el-input__inner{ //深层作用选择器更改scss设定
-            width:200px;
-            color:#fff;
-            border:1px solid #999;
-            background-color:#333;
-        }
-    }
-}
 </style>

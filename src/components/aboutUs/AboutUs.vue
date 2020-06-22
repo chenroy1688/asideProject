@@ -65,11 +65,9 @@ export default {
       getData(){
          this.$http.get("../static/newsDatas.json").then(res => {
             this.newData = res.data[0]
-            // console.log(this.newData);
             let _ul = $('.demo2');
 
             for(var i=0; i < this.newData.length; i++){
-               // console.log(this.newData[i])
                _ul.append(
                   $('<li>',{
                      // class : 'test_li'

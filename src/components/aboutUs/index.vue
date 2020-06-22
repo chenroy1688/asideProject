@@ -68,13 +68,6 @@ export default {
 
 <style scoped lang="scss">
 
-.fade-enter-active, .fade-leave-active {
-    transition: opacity .5s;
-}
-.fade-enter, .fade-leave-to{
-    opacity: 0;
-}
-
 /* 产品展示 -- 左侧选单 */
 .list-group-item{
     display:block;

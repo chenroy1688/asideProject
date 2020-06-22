@@ -46,11 +46,17 @@ module.exports = [
                 componentName: 'form3_All'
             }, 
             {
-                name: '懒加载功能',
+                name: '懒加载(点击加载)',
                 href:'/FormFour_All',
                 icon:'icon-user',
                 componentName: 'form4_All'
-            }
+            },
+            {
+                name: '懒加载(滚动加载)',
+                href:'/FormFive_All',
+                icon:'icon-user',
+                componentName: 'form5_All'
+            },
         ]
     },
     {

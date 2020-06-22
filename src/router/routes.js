@@ -321,7 +321,7 @@ export const routes = [
       title:'表单增删改查'
     }
   },
-  { //表单功能 (分页04 -- 实现懒加载功能)
+  { //表单功能 (分页04 -- 实现懒加载功能 - 点击加载)
     path:'/FormFour_All',
     components:{
       default : resolve => require(['@/components/FormDemo/form4_All'],resolve),
@@ -333,7 +333,22 @@ export const routes = [
       foot:Footer
     },
     meta:{
-      title:'表单懒加载'
+      title:'表单懒加载( 点击加载 )'
+    }
+  },
+  { //表单功能 (分页05 -- 实现懒加载功能 - 滚动加载)
+    path:'/FormFive_All',
+    components:{
+      default : resolve => require(['@/components/FormDemo/form5_All'],resolve),
+      rightmenu:RightMenu,
+      leftAside:AsidePage,
+      header:Header,
+      gototop:Gototop,
+      SportPic:Sport_Pic,
+      foot:Footer
+    },
+    meta:{
+      title:'表单懒加载( 滚动加载 )'
     }
   },
   { //以上路由都没有 导回首页
