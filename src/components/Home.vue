@@ -42,7 +42,7 @@
             </el-row>
             <!-- 体育赛事直播 -->
             <Sportgame :gameData="gameDatas" :time="date">
-                <span slot="Nodata"></span>
+                <span slot="Nodata">test txt</span>
             </Sportgame>
         </div> <!-- end of right_box -->
     </div>
@@ -99,7 +99,6 @@ export default {
         getgameData(){
             getGameApi()
                 .then(res => {
-                    console.log(res)
                     this.gameDatas = res.data
                 })
         },
@@ -109,6 +108,8 @@ export default {
             // }).catch((response) => {
             //     console.log('未取得新聞數據')
             // })
+
+            //获取体育新闻数据
             getNewsApi()
                 .then(res => {
                     this.NewsData = res.data

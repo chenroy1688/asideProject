@@ -48,6 +48,8 @@
                     </ul>
                 </el-col>
             </el-row>
+
+            <div>{{ Foottxt }}</div>
         </div>
 </template>
 
@@ -64,6 +66,7 @@ export default {
    },
    data(){
       return{
+          Foottxt:'',
           SportNews:{
             Bnews:'最新篮球新闻',
             Fnews:'最新足球新闻'

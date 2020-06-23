@@ -29,8 +29,7 @@
                                 </el-col>
                                 <el-col :span="16" class="el-div topic_info">
                                     <ul>
-                                        <li>> 功能練習 : 表单实现增删改查功能</li>
-                                        <li>> 功能練習 : HTML5,CSS3,axios</li>
+                                        <li>> 使用功能 : HTML5,CSS3,axios封装,mock数据模拟,vuex</li>
                                     </ul>
                                 </el-col>
                             </el-row>
@@ -53,7 +52,6 @@
                                     </el-date-picker>
                                 </div>
                             </template>
-
                             <button @click="addNew()">新增</button>
                         </el-col>
                     </el-row>
@@ -119,10 +117,11 @@
 <script>
 //请求分页数据 https://jsonplaceholder.typicode.com/posts/1/comments
 import { mapState,mapGetters,mapMutations,mapActions } from 'vuex'
+//引入mock模拟数据
+import Mock from '../../mock'
 
 export default {
     components:{
-
     },
    data(){
        return{
@@ -153,6 +152,16 @@ export default {
         )
    },
    methods:{
+       //获取mock模拟接口数据
+       getMockApi(){ 
+           this.$http.get('/api/users')
+           .then(res => {
+               console.log('res',res.data)
+           })
+           .catch(res => {
+               console.log('请求错误!!')
+           })
+       },
        //新增数据
        addNew(){
            if(!this.form.formTitle || !this.form.formUser || !this.form.formTime) return 
@@ -197,7 +206,7 @@ export default {
        }
    },
    mounted(){ //DOM载入完成调用
-    
+    this.getMockApi() //mock接口
    }
 }
 </script>

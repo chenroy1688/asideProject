@@ -4,7 +4,8 @@ import Router from 'vue-router' //引入路由
 // import VueResource from 'vue-resource'  //已停用
 import { routes } from './router/routes'   //导入router规则
 import axios from 'axios'
-import ElementUI, { Header } from 'element-ui' 
+import ElementUI, { Header } from 'element-ui' //导入element-Ui
+import Mock from './mock' //导入mock.js
 import Icon from 'vue-awesome/components/Icon'
 //引入store储存库
 import store from './store/store'
@@ -45,14 +46,14 @@ Vue.use(VueLazyload,{
   loading:'../../static/icons/loading.gif' //加载中显示图
 })
 
-// 将axios绑定给$axios属性
+// 将axios绑定给$axios属性(全局注册axios)
 // axios.defaults.baseURL = 'localhost:8080'
 Vue.prototype.$http = axios
 
 //创建路由设置
 const router = new Router({
   routes,
-  mode: 'history'
+  mode: 'history' //采用历史模式 网址路径不用hash
 })
 
 //未登入则导向 /login 登入page
