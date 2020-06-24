@@ -82,7 +82,8 @@
 
                     <!-- 编辑数据 chk弹层 -->
                     <div role="dialog" class="mask" id="layer" v-if="delView.jmp">
-                        <div class="del-dialog jmpView">
+                        <!-- 编辑 -->
+                        <div class="del-dialog jmpView bosss">
                             <div class="del-content">
                                 <div class="del-header">
                                     <h4 class="del-title">编辑数据</h4>
@@ -106,9 +107,8 @@
                                     <el-button type="primary" icon="el-icon-edit-outline" data-dismiss="modal" @click="btnCencel()">取消</el-button>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
+                        </div> <!-- end of 编辑 -->
+                    </div> <!-- end of chk弹层 -->
 
             </div>
    </div><!-- end of pc_wrap -->
@@ -196,13 +196,13 @@ export default {
             this.delView.jmp = false
        },
        update(){ //更新数据
-        for(var i = 0; i < this.trueLists.length; i++){
-            //判断id是否相同
-            if(this.trueLists[i].id == this.editData.id){
-                this.trueLists[i] = this.editData;
-                this.delView.jmp = false
+            for(var i = 0; i < this.trueLists.length; i++){
+                //判断id是否相同
+                if(this.trueLists[i].id == this.editData.id){
+                    this.trueLists[i] = this.editData;
+                    this.delView.jmp = false
+                }
             }
-        }
        }
    },
    mounted(){ //DOM载入完成调用

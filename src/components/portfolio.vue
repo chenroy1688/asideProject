@@ -8,7 +8,6 @@
               <span>Lastest News</span>
           </el-col>
       </el-row>
-      <div>{{ Foottxt }}</div>
       <!-- 渲染用户数据 -->
       <el-row class="portTab">
           <el-col :span="24" class="css_tr trColor">
@@ -50,14 +49,12 @@
 <script>
 //引入mapState
 import { mapActions, mapGetters, mapState, mapMutations } from 'vuex' 
-import { bus } from '../bus.js'
 //引入数据接口
 import { userList } from '@/api/api'
 
 export default {
   data() {
     return {
-      Foottxt:'',
       portTxt: "这是优惠讯息page",
       show: true,
       imgSrc:'../static/kobe.jpg',
@@ -80,9 +77,6 @@ export default {
       userList()
         .then(res => {
           this.userData = res.data
-        }),
-        bus.$on('chgThesame',(val) => {
-          this.Foottxt = val;
         })
   },
   methods:{

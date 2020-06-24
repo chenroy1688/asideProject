@@ -81,24 +81,40 @@ module.exports = [
         ]
     },
     {
-        name: '会员地图功能 / List',
-        id: 'basic-system',
-        icon:'icon-mobile',
-        flag:false,
-        arrow:'▶',
-        subItems: [
-                {
-                    name: '会员地图功能',
-                    href:'/forecast',
-                    icon:'icon-video',
-                    componentName: 'TodoList'
-                }, 
-                {
-                    name: '会员地图功能',
-                    href:'/personname',
-                    icon:'icon-video',
-                    componentName: 'aside_two'
-                }
-            ]
-        }
+    name: '会员地图功能 / List',
+    id: 'basic-system',
+    icon:'icon-mobile',
+    flag:false,
+    arrow:'▶',
+    subItems: [
+            {
+                name: '会员地图功能',
+                href:'/forecast',
+                icon:'icon-video',
+                componentName: 'TodoList'
+            }, 
+            {
+                name: '会员地图功能',
+                href:'/personname',
+                icon:'icon-video',
+                componentName: 'aside_two'
+            }
+        ]
+    },
+    {
+    name: '各功能 / All_Components',
+    id: 'basic-system',
+    icon:'icon-mobile',
+    flag:false,
+    arrow:'▶',
+    subItems: [
+            {
+                name: '各功能组件',
+                href:'/AllComponents',
+                icon:'icon-video',
+                componentName: 'AllComponents'
+            }
+        ]
+    },
+
 ]

@@ -351,6 +351,21 @@ export const routes = [
       title:'表单懒加载( 滚动加载 )'
     }
   },
+  { //各個功能组件 ( 左侧选单最后 )
+    path:'/AllComponents',
+    components:{
+      default : resolve => require(['@/components/share_components/all_Components'],resolve),
+      rightmenu:RightMenu,
+      leftAside:AsidePage,
+      header:Header,
+      gototop:Gototop,
+      SportPic:Sport_Pic,
+      foot:Footer
+    },
+    meta:{
+      title:'各功能组件'
+    }
+  },
   { //以上路由都没有 导回首页
     path: '*', 
     redirect:'/',
