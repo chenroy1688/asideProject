@@ -48,7 +48,6 @@ export default {
         showAddForm: false, // 是否显示编辑表单
         showEditForm: false, // 是否显示新增表单
         editFormData:{}
-        // visible:true
        }
    },
    mounted(){
@@ -56,11 +55,9 @@ export default {
    methods:{
        handleAddEmployee(employeeInfo){
            console.log('add',employeeInfo)
-           this.showAddForm = true
        },
        handleEditEmployee(employeeInfo){
            console.log('edit',employeeInfo)
-           this.showEditForm = true
        }
    }
 }

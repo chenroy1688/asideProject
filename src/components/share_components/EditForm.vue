@@ -1,7 +1,7 @@
 <template>
     <!-- back to top -->
-    <div class="pc_wrap">
-                111111
+    <div class="pc_wrap bosss">
+                102
                 <!-- 提取弹层组件 -->
                 <el-dialog
                     :title="title"
@@ -10,13 +10,13 @@
                 >
                     <el-form ref="EditForm" :model="form" :rules="rules">
                         <el-form-item label="姓名" prop="name">
-                            <el-inpul v-model="form.name"/>
+                            <el-input v-model="form.name"/>
                         </el-form-item>
                         <el-form-item label="身份证号码" prop="cid">
-                            <el-inpul v-model="form.cid"/>
+                            <el-input v-model="form.cid"/>
                         </el-form-item>
                         <el-form-item label="联系地址" prop="address">
-                            <el-inpul v-model="form.address"/>
+                            <el-input v-model="form.address"/>
                         </el-form-item>
                     </el-form>
 
@@ -59,7 +59,7 @@ export default {
             rules:{
                 name:{require:true,message:'请输入姓名',trigger:'blur'},
                 cid:{require:true,message:'请输入身份证号',trigger:'blur'},
-                name:{require:true,message:'请输入联系地址',trigger:'blur'}
+                address:{require:true,message:'请输入联系地址',trigger:'blur'}
             }
        }
    },
@@ -79,7 +79,7 @@ export default {
                     }
                 })
             },
-            handleVisibleChange(value) {
+            handleVisibleChange(value) { //双向绑定visible
                 this.$emit('update:visible', value)
             }
         }
