@@ -9,7 +9,7 @@
         </el-row>
 
         <!-- 弹筐 --------------------------------- -->
-        <EditForm
+        <!-- <EditForm
             title="新增数据"
             :visible.sync="showAddForm"
             @save="handleAddEmployee"
@@ -17,6 +17,18 @@
         <EditForm
             :model="editFormData"
             title="编辑数据"
+            :visible.sync="showEditForm"
+            @save="handleEditEmployee"
+        /> -->
+
+        <EditForm
+            title="新增"
+            :visible.sync="showAddForm"
+            @save="handleAddEmployee"
+        />
+        <EditForm
+            :model="editFormData"
+            title="编辑"
             :visible.sync="showEditForm"
             @save="handleEditEmployee"
         />
@@ -27,18 +39,29 @@
 import EditForm from './EditForm'
 
 export default {
+    components:{
+        EditForm
+    },
    data(){
        return{
         // 新增_编辑共用弹匡 --------------------------------------------->
         showAddForm: false, // 是否显示编辑表单
         showEditForm: false, // 是否显示新增表单
         editFormData:{}
+        // visible:true
        }
    },
    mounted(){
    },
    methods:{
-       
+       handleAddEmployee(employeeInfo){
+           console.log('add',employeeInfo)
+           this.showAddForm = true
+       },
+       handleEditEmployee(employeeInfo){
+           console.log('edit',employeeInfo)
+           this.showEditForm = true
+       }
    }
 }
 </script>
