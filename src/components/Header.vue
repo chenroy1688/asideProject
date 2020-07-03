@@ -30,7 +30,9 @@
                 <!-- header 主选单 -->
                 <div class="menu nav lightseagreenish">
                     <ul>
-                        <li><a href="javascript:void(0)" @click.prevent="logout" class="logoutBtn">登出</a></li>
+                        <li>
+                            <a href="javascript:void(0)" @click.prevent="logout" class="logoutBtn">登出</a>
+                        </li>
                         <li><router-link to="/products">联系我们</router-link></li>
                         <li><router-link to="/forecast">赛事预测</router-link></li>
                         <li><router-link to="/portFolio">最新信习</router-link></li>
@@ -86,8 +88,17 @@ export default {
    methods:{
        //登出
        logout(){
-           localStorage.removeItem('token'); //登出時 刪除token
-           this.$router.push('/login');      //导回登入页
+           var _this = this;
+           //登出确认
+           this.$confirm('确认退出吗?','提示',{
+
+           }).then(() => {
+                localStorage.removeItem('token'); //登出時 刪除token
+                
+                this.$router.push('/login');      //导回登入页
+           }).catch(() => {
+
+           });
        }
    },
    components:{

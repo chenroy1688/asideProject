@@ -2,22 +2,40 @@
     <!-- SPA 外层框架 -->
     <div id="app" class="total_wrap"> 
         <!-- header -->
-        <router-view name="header"></router-view>
+        <transition name="fade" mode="out-in">
+            <router-view name="header"></router-view>
+        </transition>
         <!-- 右侧新闻资料区 -->
         <router-view name="rightmenu" style="display:none"></router-view>
         <!-- contnet & aside 中间content -->
         <div class="total_content">
             <!-- 左侧下拉选项 -->
-            <router-view name="leftAside" class="aside_wrap"></router-view>
+            <transition name="fade" mode="out-in">
+                <router-view name="leftAside" class="aside_wrap"></router-view>
+            </transition>
             <!-- 主要content -->
-            <router-view class="total_content_inside"></router-view>
+            <!-- 所有match 到的组件 都能被缓存 -->
+            <keep-alive exclude="Detail">
+                <transition name="fade" mode="out-in">
+                    <router-view class="total_content_inside" v-if="$route.meta.keepAlive"></router-view>
+                </transition>
+            </keep-alive>
+            <transition name="fade" mode="out-in">
+                <router-view class="total_content_inside" v-if="!$route.meta.keepAlive"></router-view> 
+            </transition>
         </div>
         <!-- footer_体育图片区 -->
-        <router-view name="SportPic"></router-view>
+        <transition name="fade" mode="out-in">
+            <router-view name="SportPic"></router-view>
+        </transition>
         <!-- footer -->
-        <router-view name="foot"></router-view>
+        <transition name="fade" mode="out-in">
+            <router-view name="foot"></router-view>
+        </transition>
         <!-- back to top -->
-        <router-view name="gototop"></router-view>
+        <transition name="fade" mode="out-in">
+            <router-view name="gototop"></router-view>
+        </transition>
     </div>
 </template>
 
@@ -32,8 +50,7 @@ export default {
     name: 'app',
     data(){
       return{
-          list : [],
-          txtinfo : '',
+          list : []
       }
     },
     methods:{

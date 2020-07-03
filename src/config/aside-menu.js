@@ -1,19 +1,19 @@
 module.exports = [
     {
-    name: '備忘錄功能 / TodoList',
+    name: '备忘录功能',
     id: 'Table-system',
     icon:'icon-home',
     flag:false,
     arrow:'▶',
     subItems: [
             {
-                name: '工作計畫表 / todoList',
+                name: '工作计划表 / todoList',
                 href:'/AboutUs',
                 icon:'icon-home',
                 componentName: 'AboutUsne'
             }, 
             {
-                name: '備忘錄計畫表 / todoList',
+                name: '备忘录 / todoList',
                 href:'/todoList',
                 icon:'icon-home',
                 componentName: 'TodoList'
@@ -21,7 +21,7 @@ module.exports = [
         ]
     }, 
     {
-    name: '表單功能 / Form Demo',
+    name: '表单功能',
     id: 'TodoList-system',
     icon:'icon-user', 
     flag:false,
@@ -60,7 +60,7 @@ module.exports = [
         ]
     },
     {
-    name: '基础功能区 / List',
+    name: '基础功能区',
     id: 'basic-system',
     icon:'icon-home',
     flag:false,
@@ -81,7 +81,7 @@ module.exports = [
         ]
     },
     {
-    name: '会员地图功能 / List',
+    name: '会员地图功能',
     id: 'basic-system',
     icon:'icon-mobile',
     flag:false,
@@ -102,7 +102,7 @@ module.exports = [
         ]
     },
     {
-    name: '各功能 / All_Components',
+    name: '各功能',
     id: 'basic-system',
     icon:'icon-mobile',
     flag:false,

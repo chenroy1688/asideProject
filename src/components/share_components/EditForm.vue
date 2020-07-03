@@ -1,7 +1,6 @@
 <template>
-    <!-- back to top -->
-    <div class="pc_wrap bosss">
-                102
+    <div class="pc_wrap">
+                {{ model }}
                 <!-- 提取弹层组件 -->
                 <el-dialog
                     :title="title"
@@ -25,7 +24,6 @@
                         <el-button @click="handleVisibleChange(false)">取消</el-button>
                         <el-button type="primary" @click="handleSave">保存</el-button>
                     </template>
-
                 </el-dialog>
       
     </div>
@@ -36,53 +34,55 @@ export default {
    name:'EditForm',
    props:{
        //是否显示表单
-       visible:{
-           type:Boolean,
-           default:false
-       },
+    //    visible:{
+    //        type:Boolean,
+    //        default:false
+    //    },
        //弹层的title
-       title:String,
+    //    title:String,
        //回显数据
-       model:{
-           type:Object,
-           default:null
-       }
+    //    model:{
+    //        type:Object,
+    //        default:null
+    //    }
    },
    data(){
        return{
             // 新增_编辑共用弹匡 --------------------------------------------->
-            form:{
-                cid:'',
-                name:'',
-                address:''
-            },
-            rules:{
-                name:{require:true,message:'请输入姓名',trigger:'blur'},
-                cid:{require:true,message:'请输入身份证号',trigger:'blur'},
-                address:{require:true,message:'请输入联系地址',trigger:'blur'}
-            }
+            // form:{
+            //     cid:'',
+            //     name:'',
+            //     address:''
+            // },
+            // rules:{
+            //     name:{require:true,message:'请输入姓名',trigger:'blur'},
+            //     cid:{require:true,message:'请输入身份证号',trigger:'blur'},
+            //     address:{require:true,message:'请输入联系地址',trigger:'blur'}
+            // }
        }
    },
    watch:{ //监听 编辑时回显表单
-        model(employeeInfo){
-            this.form = { ...employeeInfo } //浅拷贝
-        }
+        //浅拷贝
+        // model(employeeInfo){
+        //     this.form = { ...employeeInfo } 
+        // }
    },
    mounted(){
    },
    methods:{
-            handleSave() {
-                // 表单验证 返回数据
-                this.$refs.EditForm.validate((valid) => {
-                    if (valid) {
-                        this.$emit('save', this.form)
-                    }
-                })
-            },
-            handleVisibleChange(value) { //双向绑定visible
-                this.$emit('update:visible', value)
-            }
-        }
+        //     handleSave() {
+        //         // 表单验证 返回父层数据
+        //         this.$refs.EditForm.validate((valid) => {
+        //             console.log(valid)
+        //             if (valid) {
+        //                 this.$emit('save', this.form) //将更新后数据回传给父层'save'
+        //             }
+        //         })
+        //     },
+        //     handleVisibleChange(value) { //双向绑定父层:visible.sync 
+        //         this.$emit('update:visible', value)
+        //     }
+         }
     }
 </script>
 

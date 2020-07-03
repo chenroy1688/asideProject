@@ -75,7 +75,10 @@ export const routes = [
       header:Header, //页头
       gototop:Gototop, //back to top
       SportPic:Sport_Pic,
-      foot:Footer //app.vue name="foot"
+      foot:Footer, //app.vue name="foot"
+      meta:{
+        keepAlive:false //不需要缓存
+      }
     },
     meta:{
       title:'首頁入口頁title'
@@ -90,7 +93,10 @@ export const routes = [
       header: Header,
       gototop:Gototop,
       SportPic:Sport_Pic,
-      foot:Footer
+      foot:Footer,
+      meta:{
+        keepAlive:false
+      }
     },
     meta:{
       title:'GamePlay頁title'
@@ -105,7 +111,10 @@ export const routes = [
       header: Header,
       gototop:Gototop, //back to top
       SportPic:Sport_Pic,
-      foot:Footer
+      foot:Footer,
+      meta:{
+        keepAlive:false
+      }
     },
     meta:{
       title:'portFolio頁title'
@@ -120,7 +129,10 @@ export const routes = [
       header:Header,
       gototop:Gototop,
       SportPic:Sport_Pic,
-      foot:Footer
+      foot:Footer,
+      meta:{
+        keepAlive:false
+      }
     },
     meta:{
       title:'ForeCast頁title'
@@ -137,7 +149,10 @@ export const routes = [
       header:Header,
       gototop:Gototop, 
       SportPic:Sport_Pic,
-      foot:Footer
+      foot:Footer,
+      meta:{
+        keepAlive:false
+      }
     },
     children:[ //二级路由设定
       {
@@ -176,7 +191,10 @@ export const routes = [
       header: Header,
       gototop:Gototop, //back to top
       foot:Footer,
-      SportPic:Sport_Pic
+      SportPic:Sport_Pic,
+      meta:{
+        keepAlive:false
+      }
     },
     children:[ //二级路由设定
       {
@@ -240,7 +258,10 @@ export const routes = [
       header:Header,
       gototop:Gototop, //回到顶
       SportPic:Sport_Pic,
-      foot:Footer
+      foot:Footer,
+      meta:{
+        keepAlive:false //不需要缓存
+      }
     },
     meta:{
       title:'体育服务分页title'
@@ -255,7 +276,10 @@ export const routes = [
       header:Header,
       gototop:Gototop, //回到顶
       SportPic:Sport_Pic,
-      foot:Footer
+      foot:Footer,
+      meta:{
+        keepAlive:false
+      }
     },
     meta:{
       title:'体育服务分页title'
@@ -270,7 +294,10 @@ export const routes = [
       header:Header,
       gototop:Gototop, //回到顶
       SportPic:Sport_Pic,
-      foot:Footer
+      foot:Footer,
+      meta:{
+        keepAlive:false
+      }
     },
     meta:{
       title:'备忘录计划表'
@@ -285,7 +312,10 @@ export const routes = [
       header:Header,
       gototop:Gototop,
       SportPic:Sport_Pic,
-      foot:Footer
+      foot:Footer,
+      meta:{
+        keepAlive:false
+      }
     },
     meta:{
       title:'表单数据交互功能'
@@ -300,7 +330,10 @@ export const routes = [
       header:Header,
       gototop:Gototop,
       SportPic:Sport_Pic,
-      foot:Footer
+      foot:Footer,
+      meta:{
+        keepAlive:false
+      }
     },
     meta:{
       title:'表单分页功能'
@@ -315,7 +348,10 @@ export const routes = [
       header:Header,
       gototop:Gototop,
       SportPic:Sport_Pic,
-      foot:Footer
+      foot:Footer,
+      meta:{
+        keepAlive:false
+      }
     },
     meta:{
       title:'表单增删改查'
@@ -330,7 +366,10 @@ export const routes = [
       header:Header,
       gototop:Gototop,
       SportPic:Sport_Pic,
-      foot:Footer
+      foot:Footer,
+      meta:{
+        keepAlive:false
+      }
     },
     meta:{
       title:'表单懒加载( 点击加载 )'
@@ -345,7 +384,10 @@ export const routes = [
       header:Header,
       gototop:Gototop,
       SportPic:Sport_Pic,
-      foot:Footer
+      foot:Footer,
+      meta:{
+        keepAlive:false
+      }
     },
     meta:{
       title:'表单懒加载( 滚动加载 )'
@@ -360,7 +402,10 @@ export const routes = [
       header:Header,
       gototop:Gototop,
       SportPic:Sport_Pic,
-      foot:Footer
+      foot:Footer,
+      meta:{
+        keepAlive:false
+      }
     },
     meta:{
       title:'各功能组件'
