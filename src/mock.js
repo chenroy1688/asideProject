@@ -1,8 +1,7 @@
 import Mock from 'mockjs' //引入mock.js
 const Random = Mock.Random  //Mock.Random 是一个工具类，用于生成各种随机数据
-
-
 const dataList = [] // 用于接受生成数据的数组
+
 for(let i = 0; i < 30; i++){
     const template = {
         'boolean' : Random.boolean, // 可以生成基本数据类型
@@ -21,7 +20,7 @@ for(let i = 0; i < 30; i++){
 // console.log(dataList)
 
 //list分頁接口()
-Mock.mock('http://localhost:8081/api/list','post',( params ) => {
+Mock.mock('/api/list','post',( params ) => {
 
     var info = JSON.parse(params.body)
     var [index, size, total] = [info.pageIndex, info.pageSize, dataList.length]
@@ -55,4 +54,22 @@ Mock.mock('/api/users',(req,res) => {
     })
 })
 
+//mock模拟分頁数据
+Mock.mock('/api/pageData',(req,res) => {
+    return Mock.mock({
+        'list|30':[
+            {
+                // 'id'   : '@guid',
+                'id|+1' : 1,
+                'name' : '@cname(3)',
+                'birthday'  : '@date("yyyy-MM-dd")',
+                'system' : '@cword(6)',
+                'title'  : '@cword(5)',
+                'vender': '@city()' + '@cword(2)' + '有限公司',
+                'type': /[A-Z]{2,5}-\d{5,7}/,
+                'city': '@city(true)'
+            }
+        ]
+    })
+})
 
