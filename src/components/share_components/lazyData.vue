@@ -19,7 +19,7 @@
                                             <td>{{ item.title }}</td>
                                             <td>{{ item.body }}</td>
                                             <td>
-                                                <button type="button" class="btn btn-success btn-sm">详情</button>
+                                                <el-button type="info">详情</el-button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -28,7 +28,7 @@
                         </el-col>
                         <!-- 查询按钮 -->
                          <el-col :span="24">
-                             <button v-if="moreShowBoolen" @click="moreShow" class="marTop">载入更多数据</button>
+                             <el-button type="primary" v-if="moreShowBoolen" @click="moreShow" class="marTop">载入更多数据</el-button>
                              <div v-else class="noMoreData">已无更多数据</div>
                         </el-col>
                     </el-row>

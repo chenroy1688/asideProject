@@ -81,7 +81,7 @@
                                     <td>{{ item.gender }}</td>
                                     <td>{{ item.address }}</td>
                                     <td>
-                                        <button type="button" class="delBtn">删除</button>
+                                        <el-button type="danger">删除</el-button>
                                     </td>
                                 </tr>
                                 <!-- <tr>

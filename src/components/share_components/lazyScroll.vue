@@ -16,7 +16,7 @@
                                             <td>{{ item.title }}</td>
                                             <td>{{ item.body }}</td>
                                             <td>
-                                                <button type="button" class="btn btn-success btn-sm">详情</button>
+                                                <el-button type="warning">详情</el-button>
                                             </td>
                                         </tr>
                                     </tbody>

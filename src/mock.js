@@ -21,7 +21,6 @@ for(let i = 0; i < 30; i++){
 
 //list分頁接口()
 Mock.mock('/api/list','post',( params ) => {
-
     var info = JSON.parse(params.body)
     var [index, size, total] = [info.pageIndex, info.pageSize, dataList.length]
     var len = total / size
@@ -55,9 +54,9 @@ Mock.mock('/api/users',(req,res) => {
 })
 
 //mock模拟分頁数据
-Mock.mock('/api/pageData',(req,res) => {
+Mock.mock('/api/paginationData',(req,res) => {
     return Mock.mock({
-        'list|30':[
+        'list|50':[
             {
                 // 'id'   : '@guid',
                 'id|+1' : 1,
@@ -65,7 +64,7 @@ Mock.mock('/api/pageData',(req,res) => {
                 'birthday'  : '@date("yyyy-MM-dd")',
                 'system' : '@cword(6)',
                 'title'  : '@cword(5)',
-                'vender': '@city()' + '@cword(2)' + '有限公司',
+                'vender': '@city()' + '@cword(2)',
                 'type': /[A-Z]{2,5}-\d{5,7}/,
                 'city': '@city(true)'
             }

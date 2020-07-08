@@ -31,6 +31,7 @@
                         <el-input size="mini" v-model="searchTxt"></el-input>
                     </el-col>
                     <el-col :span="3">
+                        <!-- 开启/关闭 查询筐 -->
                         <a @click="showSeach" class="searchA">
                             {{ setShowMsg }}
                             <i :class="{
@@ -44,7 +45,8 @@
                         <el-button type="success" size="small" >&nbsp;新增&nbsp;</el-button>
                     </el-col>
                 </el-row>
-
+                
+            <!-- 表格 分页 -->
             <div class="c-earch-table">
                 <!-- 分页 Start -->
                 <el-table :data="list.slice((currentPage - 1) * pagesize, currentPage * pagesize)">
@@ -149,16 +151,11 @@ export default {
         gUser(){ //取得分页数据
             this.$http.get('/api/pageData')
             .then(res => {
-                // console.log(res.data.list)
                 this.list = res.data.list
             })
             .catch(res => {
                 console.log('error')
             })
-        },
-        //新增数据
-        handleAdd(){ 
-
         },
         handleSizeChange(size){
             this.pagesize = size
@@ -176,20 +173,20 @@ export default {
         handleShowTips(index){ //删除
             this.setContent = '删除后数据将无法恢复,是否继续?'
             this.setTitle = '删除'
-
+            //验证删除提示
             this.$confirm(this.setContent, this.setTitle, {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
-                }).then(() => {
+                }).then(() => { //确认后执行
                     this.$message({
                         type: 'success',
                         showClose: true,
                         message: '恭喜您，' + this.setTitle + '成功！'
                     });
-
+                    //删除该笔数据
                     this.list.splice(index,1)
-                }).catch(() => {
+                }).catch(() => { //取消
                     this.$message({
                         type: 'info',
                         message: '已取消'
@@ -237,6 +234,11 @@ a.searchA{
 }
 a.searchA:hover{
     color:#0000ff;
+}
+.el-pagination .btn-next span,
+.el-pagination .btn-prev span{
+    color:#ff0000; 
+    border:1px solid #ff0000;
 }
 
 

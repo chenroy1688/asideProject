@@ -9,12 +9,12 @@
                         </el-col>
                     </el-row>
 
-                    <div id="demo" style="display:none">
-                        <button @click="show = !show">toggle</button>
+                    <!-- <div id="demo">
+                        <el-button type="success" @click="show = !show">toggle</el-button>
                         <transition name="fade">
                             <p v-if="show">Hello</p>
                         </transition>
-                    </div>
+                    </div> -->
 
                     <!-- 計畫head -->
                     <el-row>
@@ -29,7 +29,9 @@
                                 </el-col>
                                 <el-col :span="16" class="el-div topic_info">
                                     <ul>
-                                        <li>> 使用功能 : HTML5,CSS3,axios封装,mock数据模拟,vuex</li>
+                                        <li>> 功能練習 : 表单实现增删改查功能</li>
+                                        <li>> 數據調用 : Mock模拟api数据</li>
+                                        <li>> 使用功能 : HTML5,CSS3,封装axios,Mock,vuex</li>
                                     </ul>
                                 </el-col>
                             </el-row>
@@ -52,7 +54,7 @@
                                     </el-date-picker>
                                 </div>
                             </template>
-                            <button @click="addNew()">新增</button>
+                            <el-button type="primary" @click="addNew()">新增</el-button>
                         </el-col>
                     </el-row>
                     <!-- 表格 -->
@@ -72,8 +74,8 @@
                                     <td>{{ item.user }}</td>
                                     <td>{{ item.date }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-success btn-sm" @click="btnEdit(item)">编辑</button> <!-- 参数传入整比对象数据 -->
-                                        <button type="button" class="btn btn-delete btn-sm" @click="delData(index)">删除</button>
+                                        <el-button type="success" @click="btnEdit(item)">编辑</el-button> <!-- 参数传入整比对象数据 -->
+                                        <el-button type="danger" @click="delData(index)">删除</el-button>
                                     </td>
                                 </tr>
                             </tbody>
