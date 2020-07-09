@@ -16,10 +16,10 @@
                         </transition>
                     </div> -->
 
-                    <!-- 計畫head -->
+                    <!-- 计划head -->
                     <el-row>
                         <el-col :span="24" class="panel-heading">
-                            <!-- 功能說明 -->
+                            <!-- 功能说明 -->
                             <el-row class="el_row">
                                 <el-col :span="8" class="el-div">
                                     <h1 class="topic">
@@ -29,9 +29,9 @@
                                 </el-col>
                                 <el-col :span="16" class="el-div topic_info">
                                     <ul>
-                                        <li>> 功能練習 : 表单实现增删改查功能</li>
-                                        <li>> 數據調用 : Mock模拟api数据</li>
-                                        <li>> 使用功能 : HTML5,CSS3,封装axios,Mock,vuex</li>
+                                        <li>> 功能练习 : 表单实现增删改查功能</li>
+                                        <li>> 数据调用 : Mock模拟api数据</li>
+                                        <li>> 使用功能 : HTML5,CSS3,scss,封装axios,Mock,vuex</li>
                                     </ul>
                                 </el-col>
                             </el-row>
@@ -167,8 +167,9 @@ export default {
        //新增数据
        addNew(){
            if(!this.form.formTitle || !this.form.formUser || !this.form.formTime) return 
-           //取出当前数据id最大值 + 1 (避免修改相同数据)
+           //取出当前数据id最大值在+ 1
            var _id = Math.max(...this.trueLists.map(item => item.id)) + 1
+           console.log('_id',_id)
 
            this.trueLists.unshift(
                {

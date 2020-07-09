@@ -20,9 +20,9 @@
                         </el-col>
                         <el-col :span="16" class="el-div topic_info">
                             <ul>
-                                <li>> 功能練習 : 表单实现分页功能 (新增 / 编辑 / 删除 / 查询)</li>
-                                <li>> 數據調用 : 使用Mock模擬api数据</li>
-                                <li>> 功能練習 : HTML5,CSS3,axios,Vuex,Mock</li>
+                                <li>> 功能练习 : 表单实现分页功能 (新增 / 编辑 / 删除 / 查询)</li>
+                                <li>> 数据调用 : 使用Mock模擬api数据</li>
+                                <li>> 练习 : HTML5,CSS3,Scss,axios,Vuex,Mock</li>
                             </ul>
                         </el-col>
                     </el-row>
@@ -56,7 +56,7 @@
             <div class="c-earch-table">
                 <!-- 分页 Start -->
                 <el-table :data="list.slice((currentPage - 1) * pagesize, currentPage * pagesize)">
-                    <el-table-column type="index" label="序"></el-table-column>
+                    <el-table-column prop="id" label="序"></el-table-column>
                     <el-table-column prop="name" label="姓名"></el-table-column>
                     <el-table-column prop="birthday" label="出生日期"></el-table-column>
                     <el-table-column prop="system" label="设备名称"></el-table-column>
@@ -67,7 +67,8 @@
                             <div>
                                 <el-button type="warning">查看</el-button>
                                 <el-button type="primary" @click="handleShowEditDialog">编辑</el-button>
-                                <el-button type="danger" @click="Del()">删除</el-button>
+                                <!-- scope.$index 传入索引, scope.row传入数组 -->
+                                <el-button type="danger" @click="Del(scope.$index,scope.row)">删除</el-button>
                             </div>
                         </template>
                     </el-table-column>
@@ -147,31 +148,32 @@ export default {
             this.currentPage = currentPage
             console.log(`当前页${currentPage}`)
         },
-        //编辑
+        //编辑数据
         handleShowEditDialog(){ 
             this.$router.push({ //手动导向编辑页面
                 path:'/edit'
             })
         },
-        //删除
-        Del(index){ 
-            console.log('indexxxx',index)
-
+        //删除数据
+        Del(index,row){ 
+            console.log('indexxxx',index,row.id)
             this.setContent = '删除后数据将无法恢复,是否继续?'
-            this.setTitle = '删除'
+            this.setTitle = '提示'
+
             //验证删除提示
             this.$confirm(this.setContent, this.setTitle, {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
-                }).then(() => { //确认后执行
+                //确认后执行
+                }).then(() => { 
                     this.$message({
                         type: 'success',
                         showClose: true,
                         message: '恭喜您，' + this.setTitle + '成功！'
                     });
                     //删除该笔数据
-                    this.list.splice(index,1)
+                    this.list.splice(row.id,1)
                 }).catch(() => { //取消
                     this.$message({
                         type: 'info',

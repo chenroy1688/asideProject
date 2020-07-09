@@ -52,7 +52,7 @@
                                 <input type="text" class="form-control text-keyword"
                                 placeholder="输入计画项目后,按确认新增计画" @keyup.enter="addListItem" v-model="inputVal">
                                 <div class="input-group-btn">
-                                    <button @click="addListItem" :disabled="!inputVal">添加计画</button>
+                                    <el-button type="primary" @click="addListItem" :disabled="!inputVal">添加计画</el-button>
                                 </div>
                             </div>
                             <!-- 计画区 -->
