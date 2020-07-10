@@ -48,7 +48,7 @@
                 </el-col>
                 <el-col :span="4">
                     <el-button type="primary" size="small" >&nbsp;查询&nbsp;</el-button>
-                    <el-button type="success" size="small" >&nbsp;新增&nbsp;</el-button>
+                    <el-button type="success" size="small" @click="add">&nbsp;新增&nbsp;</el-button>
                 </el-col>
             </el-row>
                 
@@ -65,8 +65,8 @@
                     <el-table-column label="查看">
                         <template slot-scope="scope">
                             <div>
-                                <el-button type="warning">查看</el-button>
-                                <el-button type="primary" @click="handleShowEditDialog">编辑</el-button>
+                                <!-- <el-button type="warning">查看</el-button> -->
+                                <el-button type="primary" @click="editNew">编辑</el-button>
                                 <!-- scope.$index 传入索引, scope.row传入数组 -->
                                 <el-button type="danger" @click="Del(scope.$index,scope.row)">删除</el-button>
                             </div>
@@ -93,11 +93,25 @@
             <!-- 分页 End -->
         </div> 
 
+        <!-- 弹筐组件 (新增) -->
+        <EditForm
+            title="新增数据"
+            :visible.sync="showAddForm"
+            @save="handleAddEmployee"
+        ></EditForm>
+        <!-- 弹筐组件 (编辑) -->
+        <EditForm
+            title="編輯數據"
+            :visible.sync="showEditForm"
+            @save="handleEditEmployee"
+        ></EditForm>
+
    </div><!-- end of pc_wrap -->
 </template>
 
 <script>
 import { mapState,mapGetters,mapMutations,mapActions } from 'vuex'
+import EditForm from '@/components/share_components/EditForm02'
 //引入mock模拟数据
 import Mock from '../../mock'
 //引入封装api接口
@@ -107,11 +121,11 @@ import {
 
 export default {
     components:{
-
+        EditForm //弹筐组件
     },
    data(){
        return{
-            //分页数据
+            //分页数据 -------------------------- >
             list:[],
             searchTxt:'',
             currentPage:1, //当前的页数 
@@ -120,7 +134,13 @@ export default {
             styleArrow:true, 
             setShowMsg:'开启查询',
             setContent:'',
-            setTitle:''
+            setTitle:'',
+
+            // 新增_编辑共用弹匡 ----------------- >
+            showAddForm:false, // 控制显示编辑弹筐
+            showEditForm:false, // 控制显示新增弹筐
+            editFormData:{},
+            txtInput:''
        }
    }, 
    computed:{
@@ -138,6 +158,13 @@ export default {
                 console.log('error')
             })
         },
+        //
+        handleAddEmployee(employeeInfo){
+            console.log('Add',employeeInfo)
+        },
+        handleEditEmployee(employeeInfo){
+            console.log('edit',employeeInfo)
+        },
         //每页显示的数据笔数
         handleSizeChange(size){ 
             this.pagesize = size
@@ -149,14 +176,21 @@ export default {
             console.log(`当前页${currentPage}`)
         },
         //编辑数据
-        handleShowEditDialog(){ 
-            this.$router.push({ //手动导向编辑页面
-                path:'/edit'
-            })
+        // handleShowEditDialog(){ 
+        //     this.$router.push({
+        //         path:'/edit'
+        //     })
+        // },
+        editNew(){
+            this.showEditForm = true
+        },
+        add(){
+            this.showAddForm = true
         },
         //删除数据
         Del(index,row){ 
             console.log('indexxxx',index,row.id)
+
             this.setContent = '删除后数据将无法恢复,是否继续?'
             this.setTitle = '提示'
 
@@ -173,7 +207,7 @@ export default {
                         message: '恭喜您，' + this.setTitle + '成功！'
                     });
                     //删除该笔数据
-                    this.list.splice(row.id,1)
+                    this.list.splice((row.id - 1),1)
                 }).catch(() => { //取消
                     this.$message({
                         type: 'info',

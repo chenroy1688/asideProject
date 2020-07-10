@@ -8,94 +8,51 @@
             </el-col>
         </el-row>
 
-        <!-- 工具条 -->
-        <!-- <el-col :span="24" class="toolbar">
-            <el-form :inline="true" :model="filters">
-                <el-form-item>
-                    <el-input v-model="filters.name" placeholder="请输入"></el-input> 
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="success" @click="getUserList">查询</el-button> 
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" @click="handleAdd">新增</el-button> 
-                </el-form-item>
-            </el-form>
-        </el-col> -->
+        <!-- 弹筐 --------------------------------- -->
+        <EditForm
+            title="新增数据"
+            :visible.sync="showAddForm"
+            @save="handleAddEmployee"
+        />
+        <EditForm
+            :model="tableData2"
+            title="编辑数据"
+            :visible.sync="showEditForm"
+            @save="handleEditEmployee"
+        />
+        <el-row class="searchBox">
+            <el-col :span="4">
+                <el-input v-model="txtInput" placeholder="请输入内容"></el-input>
+            </el-col>
+            <el-col :span="20">
+                <el-button type="success">查寻</el-button>
+                <el-button type="primary" @click="addNew">新增</el-button>{{ txtInput }}
+            <!-- <el-button type="primary" @click="editNew">编辑</el-button> -->
+            </el-col>
+        </el-row>
+        <!-- <div>
+            <ul class="dataUl">
+                <li v-for="(value,index) in editFormData" :key="index">
+                    <span>{{ index }}</span> -- {{ value }}
+                </li>
+            </ul>
+        </div> -->
+        <!-- 操作表格 -->
+        <el-table :data="tableData2" :row-class-name="tableRowClassName">
+            <el-table-column prop="cid" label="编号" width="250"></el-table-column>
+            <el-table-column prop="name" label="姓名" width="220"></el-table-column>
+            <el-table-column prop="address" label="地址"></el-table-column>
+            <el-table-column label="操作" width="220">
+                <el-button type="primary" @click="editNew(tableData2)">编辑</el-button>
+                <el-button type="danger">删除</el-button>
+            </el-table-column>
+        </el-table>
 
-        <!-- 分頁列表 --------------------------------- -->
-        <div class="c-main auth userControl">
-            <!-- 头部信息 Start -->
-                <el-row>
-                    <el-col :span="6" v-show="setShow">
-                        <el-input size="mini" v-model="searchTxt"></el-input>
-                    </el-col>
-                    <el-col :span="3">
-                        <!-- 开启/关闭 查询筐 -->
-                        <a @click="showSeach" class="searchA">
-                            {{ setShowMsg }}
-                            <i :class="{
-                            'el-icon-arrow-down el-icon--right': styleArrow ,
-                            'el-icon-arrow-up el-icon--right': setShow}"
-                            ></i>
-                        </a>
-                    </el-col>
-                    <el-col :span="4">
-                        <el-button type="primary" size="small" >&nbsp;查询&nbsp;</el-button>
-                        <el-button type="success" size="small" >&nbsp;新增&nbsp;</el-button>
-                    </el-col>
-                </el-row>
-                
-            <!-- 表格 分页 -->
-            <div class="c-earch-table">
-                <!-- 分页 Start -->
-                <el-table :data="list.slice((currentPage - 1) * pagesize, currentPage * pagesize)">
-                    <el-table-column type="index" label="序"></el-table-column>
-                    <el-table-column prop="name" label="姓名"></el-table-column>
-                    <el-table-column prop="birthday" label="出生日期"></el-table-column>
-                    <el-table-column prop="system" label="设备名称"></el-table-column>
-                    <el-table-column prop="vender" label="公司地址"></el-table-column>
-                    <el-table-column prop="city" label="所在地区"></el-table-column>
-                    <el-table-column label="查看">
-                        <template slot-scope="scope">
-                            <div>
-                                <el-button type="warning">查看</el-button>
-                                <el-button type="primary" @click="handleShowEditDialog">编辑</el-button>
-                                <el-button type="danger" @click="handleShowTips(index)">删除</el-button>
-                            </div>
-                        </template>
-                    </el-table-column>
-                </el-table>
-            </div><!-- 列表 End -->
-
-            <!-- 分页 按钮 -->
-            <div class="t-center mt-15 paginationBox">
-                <el-pagination
-                    background
-                    @size-change="handleSizeChange"
-                    @current-change="handleCurrentChange"
-                    :current-page="currentPage"
-                    :page-sizes="[5,10,20,50]"
-                    :page-size="pagesize"
-                    layout="total, sizes, prev, pager, next, jumper"
-                    prev-text="上一页"
-                    next-text="下一页"
-                    :total="list.length">
-                </el-pagination>
-            </div>
-            <!-- 分页 End -->
-        </div>
     </div>
 </template>
 
 <script>
 import EditForm from './EditForm' //弹层
-//引入mock模拟数据
-import Mock from '../../mock'
-//引入封装api接口
-import { 
-    usersPage 
-    } from '@/api/api' 
 
 export default {
     components:{
@@ -104,144 +61,82 @@ export default {
    data(){
        return{
         // 新增_编辑共用弹匡 --------------------------------------------->
-        users:[],
-        total:0, //总数据比数
-        page:1, //分页
-        filters:{
-            name:''
-        },
-        editFormRules:{
-            name:[
-                {
-                    required:true,
-                    message:'請輸入姓名',
-                    trigger:'blue'
-                }
-            ]
-        },
-        //分页数据
-        list:[],
-        searchTxt:'',
-        currentPage:1, //当前的页数
-        pagesize:5, //每页展示笔数
-        setShow:false, 
-        styleArrow:true, 
-        setShowMsg:'开启查询',
-        setContent:'',
-        setTitle:''
+        showAddForm: false, // 是否显示编辑表单
+        showEditForm: false, // 是否显示新增表单
+        editFormData:{},
+        txtInput:'',
+        tableData2: [
+            {
+                cid: '1',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1518 弄',
+            }, {
+                cid: '2',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1518 弄'
+            }
+        ]
        }
    },
    mounted(){
-       this.getUserList() //取得用户数据
-       this.gUser()
    },
    methods:{
-       //取得用户数据
-        getUserList(){
-            let para = {
-                page : this.page,
-                name : this.filters.name
+       //新增数据
+       handleAddEmployee(employeeInfo){
+            console.log('新增數據',employeeInfo)
+            var {cid,name,address} = employeeInfo //解构
+            //验证
+            if(!cid || !name || !address){
+                alert('請填入完整數據!!')
+                return
             }
-            usersPage(para).
-                then(res => {
-                    // console.log(para,res)
-                    this.users = res.data
-                })
-        },
-        gUser(){ //取得分页数据
-            this.$http.get('/api/pageData')
-            .then(res => {
-                this.list = res.data.list
-            })
-            .catch(res => {
-                console.log('error')
-            })
-        },
-        handleSizeChange(size){
-            this.pagesize = size
-            console.log(`每页${size}条`)
-        },
-        handleCurrentChange(currentPage){
-            this.currentPage = currentPage
-            console.log(`当前页${currentPage}`)
-        },
-        handleShowEditDialog(){ //编辑
-            this.$router.push({ //手动导向编辑页面
-                path:'/edit'
-            })
-        },
-        handleShowTips(index){ //删除
-            this.setContent = '删除后数据将无法恢复,是否继续?'
-            this.setTitle = '删除'
-            //验证删除提示
-            this.$confirm(this.setContent, this.setTitle, {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    type: 'warning'
-                }).then(() => { //确认后执行
-                    this.$message({
-                        type: 'success',
-                        showClose: true,
-                        message: '恭喜您，' + this.setTitle + '成功！'
-                    });
-                    //删除该笔数据
-                    this.list.splice(index,1)
-                }).catch(() => { //取消
-                    this.$message({
-                        type: 'info',
-                        message: '已取消'
-                    });
-                });
-        },
-        showSeach(){ //更多条件查询
-            const msg = this.setShowMsg;
 
-            if(msg === '开启查询'){
-                this.setShow = true
-                this.styleArrow = false
-                this.setShowMsg = '关闭查询'
-            }else{
-                this.setShow = false
-                this.styleArrow = true
-                this.setShowMsg = '开启查询'
-            }
-        }
+            this.tableData2.push(
+                { 
+                    cid : cid,
+                    name : name,
+                    address : address
+                }
+            )
+            this.showAddForm = false
+       },
+       //编辑更新数据
+       handleEditEmployee(employeeInfo){
+           console.log('子组件传回的更新数据',employeeInfo)
+            this.tableData2 = employeeInfo
+            this.showEditForm = false
+       },
+       addNew(){
+           this.showAddForm = true
+       },
+       editNew(tableData2){
+           this.showEditForm = true
+           var {cid,name,address} = tableData2
+           console.log(tableData2)
+
+           this.editFormData = {
+               cid : cid,
+               name: name,
+               address:address
+           }
+           
+       },
+       tableRowClassName({row,rowIndex}){  //栏位表格颜色
+           if(rowIndex === 1){
+               return 'warning-row'
+           }else if(rowIndex === 3){
+               return 'success-row'
+           }
+           return ''
+       }
    }
 }
 </script>
 
-<style scoped lang="scss">
+<style>
 /* ------------------------------
         goto top 
 ------------------------------ */
-.c-earch-table{
-    margin-top:20px;
-    .show-underline{
-        padding:4px;
-        border:1px solid #999;
-    }
-}
-.paginationBox{
-    margin:30px auto;
-    text-align:center;
-}
-a.searchA{
-    display:block;
-    padding:8px;
-    text-align:center;
-    color:#ff0000;
-    cursor:pointer;
-}
-a.searchA:hover{
-    color:#0000ff;
-}
-.el-pagination .btn-next span,
-.el-pagination .btn-prev span{
-    color:#ff0000; 
-    border:1px solid #ff0000;
-}
-
-
 .commons h1{
     position:relative;
     font-size:16px;
