@@ -7,6 +7,7 @@
         </transition>
         <!-- 右侧新闻资料区 -->
         <router-view name="rightmenu" style="display:none"></router-view>
+
         <!-- contnet & aside 中间content -->
         <div class="total_content">
             <!-- 左侧下拉选项 -->
@@ -24,6 +25,7 @@
                 <router-view class="total_content_inside" v-if="!$route.meta.keepAlive"></router-view> 
             </transition>
         </div>
+        
         <!-- footer_体育图片区 -->
         <transition name="fade" mode="out-in">
             <router-view name="SportPic"></router-view>
@@ -50,7 +52,7 @@ export default {
     name: 'app',
     data(){
       return{
-          list : []
+        
       }
     },
     methods:{

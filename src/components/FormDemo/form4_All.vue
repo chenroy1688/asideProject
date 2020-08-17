@@ -84,8 +84,8 @@ export default {
    },
    methods:{
         loading(){
-            var imgArr = this.imgArr;
-            var imgCount = this.imgCount;
+            let imgArr = this.imgArr;
+            let imgCount = this.imgCount;
 
             for(let img of imgArr){
                 console.log('imgggg',img);

@@ -59,7 +59,6 @@ import PersonName from '../components/products/third/PersonName.vue' //网站联
 //左侧选单 --------------------------------------
 // import menus from '@/config/menu-config'
 
-
 //各个page 路由 --------------------------------------
 export const routes = [
   { //登入

@@ -133,9 +133,7 @@ import NewEditForm  from '@/components/share_components/EditForm02'
 //引入mock模拟数据
 import Mock from '../../mock'
 //引入封装api接口
-import { 
-    usersPage 
-    } from '@/api/api' 
+import { usersPage } from '@/api/api' 
 
 export default {
     components:{
