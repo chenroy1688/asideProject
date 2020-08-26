@@ -3,6 +3,7 @@
         <!-- 登入版块 -->
         <div :class="{login : isLogin}" class="">
         <div class="login_text">{{ nameText }}</div>
+        
         <!-- 登入区块 -->
         <form @submit.prevent="login">
             <div class="loginInput">

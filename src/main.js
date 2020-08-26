@@ -61,7 +61,7 @@ router.beforeEach((to, from, next) => {
   //取localstorage value
   const isLogin = localStorage.getItem('token') == 'ImLogin'
 
-  /* 路由发生变化修改页面title */
+  /* 路由发生变化修改页面title to为前往的目标页 */
   if(to.meta.title){
     document.title = to.meta.title
   }
