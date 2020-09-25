@@ -8,7 +8,7 @@ import ElementUI, { Header } from 'element-ui' //导入element-Ui
 import Mock from './mock' //导入mock.js
 import Icon from 'vue-awesome/components/Icon'
 //引入store储存库
-import store from './store/store'
+import store from './store'
 //引入懒加载
 import VueLazyload from 'vue-lazyload' 
 

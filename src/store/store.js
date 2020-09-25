@@ -111,7 +111,7 @@ const store = new Vuex.Store({
                 state.newLists = state.todoLists.filter( item => {
                   return item.status //腮选status为true
                 })
-                console.log(state.newLists);
+                // console.log(state.newLists);
                 break;
             case 3:  //未完成
                 state.newLists = state.todoLists.filter( item => {

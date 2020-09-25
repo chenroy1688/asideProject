@@ -40,9 +40,9 @@
                     <button type="button" @click="getgameData">载入体育赛事</button>
                 </el-col>
             </el-row>
-            <!-- 体育赛事直播 -->
+            <!-- 体育赛事直播 子組件-->
             <Sportgame :gameData="gameDatas" :time="date">
-                <span slot="Nodata">test txt</span>
+                <span slot="Nodata">父层数据slot</span>
             </Sportgame>
         </div> <!-- end of right_box -->
     </div>
@@ -126,7 +126,6 @@ export default {
         //调用methods的getNews() -- 新闻列表
         this.getNews();
         //使用setInterval调用methods方法  setInterval()调用不需要加() 
-        // this.getNews()
         // setInterval(this.getNews,30000)
     }
 }
