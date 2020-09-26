@@ -284,7 +284,7 @@ export const routes = [
       title:'体育服务分页title'
     }
   },
-  { //备忘录功能 (分页02 -- 备忘录计划表todoList)
+  { //备忘录功能 (子选项02 -- 备忘录计划表todoList)
     path:'/todoList',
     components:{
       default : resolve => require(['@/components/TodoList/TodoList'],resolve),
@@ -302,7 +302,7 @@ export const routes = [
       title:'备忘录计划表'
     }
   },
-  { //表单功能 (分页01 -- 前后数据交互,实现全选功能)
+  { //表单功能 (子选项01 -- 前后数据交互,实现全选功能)
     path:'/FormOne_All',
     components:{
       default : resolve => require(['@/components/FormDemo/form1_All'],resolve),
@@ -320,7 +320,7 @@ export const routes = [
       title:'表单数据交互功能'
     }
   },
-  { //表单功能 (分页02 -- 分页功能)
+  { //表单功能 (子选项02 -- 分页功能)
     path:'/FormTwo_All',
     components:{
       default : resolve => require(['@/components/FormDemo/form2_All'],resolve),
@@ -338,7 +338,7 @@ export const routes = [
       title:'表单分页功能'
     }
   },
-  { //表单功能 (分页03 -- 增删改查功能)
+  { //表单功能 (子选项03 -- 增删改查功能)
     path:'/FormThree_All',
     components:{
       default : resolve => require(['@/components/FormDemo/form3_All'],resolve),
@@ -356,7 +356,7 @@ export const routes = [
       title:'表单增删改查'
     }
   },
-  { //表单功能 (分页04 -- 实现懒加载功能 - 点击加载)
+  { //表单功能 (子选项04 -- 实现懒加载功能 - 点击加载)
     path:'/FormFour_All',
     components:{
       default : resolve => require(['@/components/FormDemo/form4_All'],resolve),
@@ -374,7 +374,7 @@ export const routes = [
       title:'表单懒加载( 点击加载 )'
     }
   },
-  { //表单功能 (分页05 -- 实现懒加载功能 - 滚动加载)
+  { //表单功能 (子选项05 -- 实现懒加载功能 - 滚动加载)
     path:'/FormFive_All',
     components:{
       default : resolve => require(['@/components/FormDemo/form5_All'],resolve),
@@ -390,6 +390,24 @@ export const routes = [
     },
     meta:{
       title:'表单懒加载( 滚动加载 )'
+    }
+  },
+  { //会员地图功能 (子选项01 - 中国疫情地图 )
+    path:'/chinaMap',
+    components:{
+      default : resolve => require(['@/components/memMap/chinaMap'],resolve),
+      rightmenu:RightMenu,
+      leftAside:AsidePage,
+      header:Header,
+      gototop:Gototop,
+      SportPic:Sport_Pic,
+      foot:Footer,
+      meta:{
+        keepAlive:false
+      }
+    },
+    meta:{
+      title:'中国疫情地图'
     }
   },
   { //各個功能组件 ( 左侧选单最后 )
