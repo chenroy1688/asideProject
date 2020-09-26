@@ -1,10 +1,14 @@
 <template>
     <!-- right 直播列表 -->
 				<div class="content">
-            <div class="">
+            <div class="el_div">
                 <!-- <button type="button" @click="sendFather">传递给父层数据</button> -->
-                <button @click="chgMsg">传给同层的数据</button>
-                <slot name="Nodata">slot没有数据就用这里的数据</slot>
+                <button class="el-input" @click="chgMsg">传给同层的数据</button>
+                <div class="">
+                    <slot>slot没有数据就用这里的数据</slot> <!-- 默認 插槽 -->
+                    <slot name="hasName"></slot> <!-- 具名 插槽 -->
+                    <slot name="father" :users="father1"></slot> <!-- 作用域插槽 -->
+                </div>
             </div>
             
             <div class="data_box">
@@ -64,19 +68,27 @@ export default {
 			type:Object
     },
 	},
-  	data(){
-       return{
-            footerStyle:{
-                bg:true,
-                txt:true
-            },
-            footInfo:{
-                info:'Copyright@ 2019 测试页面 soniclive.cn  ALL Rights Reserved',
-                areaCode:'+86',
-                mail:"3217324595@qq.com",
-                QQ:'3217324595'
-            }
-       }
+  data(){
+    return{
+        footerStyle:{
+            bg:true,
+            txt:true
+        },
+        footInfo:{
+            info:'Copyright@ 2019 测试页面 soniclive.cn  ALL Rights Reserved',
+            areaCode:'+86',
+            mail:"3217324595@qq.com",
+            QQ:'3217324595'
+        },
+        father1:{
+          name:'我是作用域slot001數據',
+          age:20
+        },
+        father2:{
+          name:'作用域slot002',
+          age:26
+        }
+    }
    },
    methods:{
 	   //传数据给父层

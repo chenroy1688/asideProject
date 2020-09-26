@@ -36,13 +36,21 @@
 
             <!-- 接api按钮 -->
             <el-row>
-                <el-col :span="24">
-                    <button type="button" @click="getgameData">载入体育赛事</button>
+                <el-col :span="24" class="el_div">
+                    <button type="button" class="el-input" @click="getgameData">载入体育赛事</button>
                 </el-col>
             </el-row>
+
             <!-- 体育赛事直播 子組件-->
             <Sportgame :gameData="gameDatas" :time="date">
-                <span slot="Nodata">父层数据slot</span>
+                <p style="color:black">我是默认的 slot</p> <!-- 默認插槽 -->
+                <template v-slot:hasName> <!-- 具名插槽 -->
+                    <p style="color:black; padding:10px 0">我是具名slot</p>
+                </template>
+                <!-- 作用域插槽 slotProps接收子組件 name="father" :users="father1" -->
+                <template v-slot:father="slotProps">  
+                    <p style="color:black; padding:10px 0">作用域slot ++ {{ slotProps.users.name }}</p>
+                </template>
             </Sportgame>
         </div> <!-- end of right_box -->
     </div>
@@ -58,7 +66,6 @@ import { toggle } from '../mixin/tooltip.js'
 import { getGameApi,getNewsApi } from '@/api/api'
 
 export default {
-    // name:'tooltip',
     //注册各组件
     components:{
         NewsArea,

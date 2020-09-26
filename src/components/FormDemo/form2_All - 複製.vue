@@ -36,8 +36,8 @@
                 <el-col :span="6" v-show="setShow">
                     <el-input size="mini" v-model="searchTxt" placeholder="请输入查询内容"></el-input>
                 </el-col>
-                <el-col :span="3">
-                    <!-- 开启/关闭 查询筐 -->
+                <!-- <el-col :span="3">
+      
                     <a @click="showSeach" class="searchA">
                         {{ setShowMsg }}
                         <i :class="{
@@ -45,12 +45,13 @@
                         'el-icon-arrow-up el-icon--right': setShow}"
                         ></i>
                     </a>
-                </el-col>
+                </el-col> -->
                 <el-col :span="4">
                     <el-button type="primary" size="small" >&nbsp;查询&nbsp;</el-button>
-                    <el-button type="success" size="small" @click="add">&nbsp;新增&nbsp;</el-button>
+                    <el-button type="success" size="small" @click="addNew">&nbsp;新增&nbsp;</el-button>
                 </el-col>
             </el-row>
+            
                 
             <!-- 表格 分页 -->
             <div class="c-earch-table">
@@ -94,23 +95,41 @@
         </div> 
 
         <!-- 弹筐组件 (新增) -->
-        <EditForm
+        <Dialog :visible.sync="showAddForm">
+            <NewEditForm ref="EditForm"/>
+            <template #footer>
+                <ElButton @click="showAddForm = false">取消</ElButton>
+                <ElButton type="primary" @click="handleAddEmployee">保存</ElButton>
+            </template>
+        </Dialog>
+
+        <!-- 弹筐组件 (编辑) -->
+        <ElDialog :visible.sync="showEditForm">
+            <NewEditForm ref="AddForm" :model="editFormData"/>
+            
+            <template #footer>
+                <ElButton @click="showEditForm = false">取消</ElButton>
+                <ElButton type="primary" @click="handleEditEmployee">保存</ElButton>
+            </template>
+        </ElDialog>
+        
+         <!-- <EditForm
             title="新增数据"
             :visible.sync="showAddForm"
             @save="handleAddEmployee" 
-        ></EditForm>
-        <!-- 弹筐组件 (编辑) -->
-        <EditForm
+        ></EditForm> -->
+        <!-- <EditForm
             title="編輯數據"
             :visible.sync="showEditForm"
             @save="handleEditEmployee"
-        ></EditForm>
+        ></EditForm> -->
+
    </div><!-- end of pc_wrap -->
 </template>
 
 <script>
 import { mapState,mapGetters,mapMutations,mapActions } from 'vuex'
-import EditForm from '@/components/share_components/EditForm02'
+import NewEditForm  from '@/components/share_components/EditForm02'
 //引入mock模拟数据
 import Mock from '../../mock'
 //引入封装api接口
@@ -118,7 +137,7 @@ import { usersPage } from '@/api/api'
 
 export default {
     components:{
-        EditForm //弹筐组件
+        NewEditForm  //弹筐组件
     },
    data(){
        return{
@@ -156,14 +175,28 @@ export default {
             })
         },
         //新增一笔数据
-        handleAddEmployee(employeeInfo){
-            // console.log('Add',employeeInfo)
-            this.list.push(employeeInfo)
-            this.showAddForm = false
+        handleAddEmployee() {
+            this.$refs.AddForm.getValue()
+            .then((employeeInfo) => {
+                // 调用添加接口
+                console.log('addddd',employeeInfo)
+            })
+            .catch((error) => {
+                // 处理表单验证失败
+                console.log('error')
+            })
         },
         //编辑一笔数据
-        handleEditEmployee(employeeInfo){
-            console.log('edit',employeeInfo)
+        handleEditEmployee() {
+            this.$refs.NewEditForm.getValue()
+            .then((employeeInfo) => {
+                // 调用编辑接口
+                console.log('editttt',employeeInfo)
+            })
+            .catch((error) => {
+                // 处理表单验证失败
+                console.log('error')
+            })
         },
         //每页显示的数据笔数
         handleSizeChange(size){ 
@@ -184,50 +217,50 @@ export default {
         editNew(){
             this.showEditForm = true
         },
-        add(){
+        addNew(){
             this.showAddForm = true
         },
         //删除数据
-        Del(index,row){ 
-            // console.log('indexxxx',index,row.id)
+        // Del(index,row){ 
+        //     console.log('indexxxx',index,row.id)
 
-            this.setContent = '删除后数据将无法恢复,是否继续?'
-            this.setTitle = '提示'
+        //     this.setContent = '删除后数据将无法恢复,是否继续?'
+        //     this.setTitle = '提示'
 
-            //验证删除提示
-            this.$confirm(this.setContent, this.setTitle, {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    type: 'warning'
-                //确认后执行
-                }).then(() => { 
-                    this.$message({
-                        type: 'success',
-                        showClose: true,
-                        message: '恭喜您，' + this.setTitle + '成功！'
-                    });
-                    //删除该笔数据
-                    this.list.splice((row.id - 1),1)
-                }).catch(() => { //取消
-                    this.$message({
-                        type: 'info',
-                        message: '已取消'
-                    });
-                });
-        },
-        showSeach(){ //更多条件查询
-            const msg = this.setShowMsg;
+        //     //验证删除提示
+        //     this.$confirm(this.setContent, this.setTitle, {
+        //             confirmButtonText: '确定',
+        //             cancelButtonText: '取消',
+        //             type: 'warning'
+        //         //确认后执行
+        //         }).then(() => { 
+        //             this.$message({
+        //                 type: 'success',
+        //                 showClose: true,
+        //                 message: '恭喜您，' + this.setTitle + '成功！'
+        //             });
+        //             //删除该笔数据
+        //             this.list.splice((row.id - 1),1)
+        //         }).catch(() => { //取消
+        //             this.$message({
+        //                 type: 'info',
+        //                 message: '已取消'
+        //             });
+        //         });
+        // },
+        // showSeach(){ //更多条件查询
+        //     const msg = this.setShowMsg;
 
-            if(msg === '开启查询'){
-                this.setShow = true
-                this.styleArrow = false
-                this.setShowMsg = '关闭查询'
-            }else{
-                this.setShow = false
-                this.styleArrow = true
-                this.setShowMsg = '开启查询'
-            }
-        }
+        //     if(msg === '开启查询'){
+        //         this.setShow = true
+        //         this.styleArrow = false
+        //         this.setShowMsg = '关闭查询'
+        //     }else{
+        //         this.setShow = false
+        //         this.styleArrow = true
+        //         this.setShowMsg = '开启查询'
+        //     }
+        // }
    },
    mounted(){ //DOM载入完成调用
     this.gUser()

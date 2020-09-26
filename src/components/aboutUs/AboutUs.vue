@@ -72,7 +72,6 @@ export default {
                   $('<li>',{
                      // class : 'test_li'
                   }).append(
-
                      [
                         $('<a>',{
                            href : 'javascript:void(0)',
@@ -188,7 +187,8 @@ export default {
    .contact_wrap h4{
       font-size:18px;
       color:#d84555;
-      line-height:70px;
+      padding:0 0 20px 0;
+      /* line-height:70px; */
    }
    .contact_wrap .mail_info{
       font-size:18px;
