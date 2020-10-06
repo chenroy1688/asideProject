@@ -1,19 +1,19 @@
 <template>
     <div class="login_wrap">
         <!-- 登入版块 -->
-        <div :class="{login : isLogin}" class="">
-        <div class="login_text">{{ nameText }}</div>
-        <!-- 登入区块 -->
-        <form @submit.prevent="login">
-            <div class="loginInput">
+        <div :class="{login : isLogin}">
+            <div class="login_text">{{ nameText }}</div>
+            <!-- 登入区块 -->
+            <form @submit.prevent="login">
+                <div class="loginInput">
                     <label>姓名 :</label>
                     <input type="text" v-model="userName" placeholder="请输入帐号" required>
                     <br>
                     <label>密码 :</label>
                     <input type="password" v-model="password" placeholder="请输入密码" required>
                 </div>
-            <button type="submit">登入</button> 
-        </form>
+                <button type="submit">登入</button> 
+            </form>
         </div>
     </div>
 </template>

@@ -39,10 +39,10 @@
                         <img class="chkIcon" v-lazy="imgSrc"/>
                     </div>
 
-                    <!-- <div class="loading bosss">
+                    <div class="loading bosss">
                         <img :src="loadImg">
                         <p>{{ imgCount }}%</p>
-                    </div> -->
+                    </div>
             </div>
    </div><!-- end of pc_wrap -->
 </template>

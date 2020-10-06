@@ -51,6 +51,30 @@
                             <button @click="alertTime">按我！更改todos的状态</button>
                         </el-col>
                     </el-row>
+
+                    <div class="el-steps">
+                        <el-steps 
+                            :space="200" 
+                            direction="vertical"
+                            :active="step"
+                            process-status="process"
+                            finish-status="wait">
+                            <el-step @click.native="on_click(1)" title="first_Button" id="one"></el-step>
+                            <el-step @click.native="on_click(2)" title="second_Button" id="two"></el-step>
+                            <el-step @click.native="on_click(3)" title="three_Button" id="three"></el-step>
+                        </el-steps>
+                    </div>
+                    <div class="el-steps-two">
+                        <el-collapse v-model="selectActiveName" @change="foldNode">
+                            <div @click="touch(1)" ref="datasource">
+                                <el-collapse-item name="2" :style="{'height':twoHeight}">
+                                    <template slot="title"></template>
+                                    <div style="width:100px;height:50px;background-color:#ddd;float:left;"></div>
+                                    <div style="width:100px;height:100px;float:left;color:red">自定義內容</div>
+                                </el-collapse-item>
+                            </div>
+                        </el-collapse>
+                    </div>
             </el-row>
         </el-row>
    </div>
@@ -97,6 +121,79 @@ export default {
         )
     },
    methods:{
+       foldNode(el){
+           var twoNode=document.getElementById("two");
+            var fourNode=document.getElementById("four");
+            var fiveNode=document.getElementById("five");
+
+            if(el.length>this.arr.length){  //点开某个
+                console.log('开');
+                this.arr=el;
+                let len=this.arr.length;
+                //确定点击的元素
+                if(this.arr[len-1]==1){
+                    this.step=0;
+                }
+                if(this.arr[len-1]==2){
+                    this.step=1;
+                    setTimeout(() => {
+                        let _this=this;
+                        this.twoHeight=_this.$refs.datasource.offsetHeight+50+"px";
+                        twoNode.style['flex-basis']=this.twoHeight;
+                        console.log(this.twoHeight);
+                    }, 10);
+                }
+                if(this.arr[len-1]==3){
+                    this.step=2;
+                }
+                if(this.arr[len-1]==4){
+                    this.step=3;
+                    setTimeout(() => {
+                        let _this=this;
+                        this.fourHeight=_this.$refs.transComponent.offsetHeight+100+"px";
+                        fourNode.style['flex-basis']=this.fourHeight;
+                    }, 10);
+                }
+                if(this.arr[len-1]==5){
+                    this.step=4;
+                    setTimeout(() => {
+                        let _this=this;
+                        this.fiveHeight=_this.$refs.collGroup.offsetHeight+50+"px";
+                        fiveNode.style['flex-basis']=this.fiveHeight;
+                    }, 10);
+                };
+
+            }else{          //关闭某个
+                console.log('关');
+                let a=el;
+                let b=this.arr;
+                //两个数组的差集,结果就是关掉的元素
+                let diff = a.concat(b).filter(v => !a.includes(v) || !b.includes(v));
+                let n=diff[0];
+                console.log(n)
+                if(n==1){
+                    this.oneHeight='200px';
+                }
+                if(n==2){
+                    this.twoHeight='200px';
+                    twoNode.style['flex-basis']=this.twoHeight;
+                    console.log(this.twoHeight);
+                }
+                if(n==3){
+                    this.threeHeight='200px';
+                }
+                if(n==4){
+                    this.fourHeight='200px';
+                    fourNode.style['flex-basis']=this.fourHeight;
+                }
+                if(n==5){
+                    this.fiveHeight='200px';
+                    fiveNode.style['flex-basis']=this.fiveHeight;
+                }
+
+                this.arr=el;
+            };
+       },
        increment(){ //执行更新store数据
            this.$store.commit({ 
                 type:'increment',
@@ -136,6 +233,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
+    .el-steps{
+        width:130px;
+        margin-top:30px;
+        float:left;
+    }
+    .el-steps-two{
+        float:left;
+        width:600px;
+        margin-left:20px;
+        margin-top:30px;
+    }
+
     p{
         margin:15px 0;
     }
