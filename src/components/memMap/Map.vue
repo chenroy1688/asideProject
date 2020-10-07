@@ -8,8 +8,9 @@
     </div> <!-- end of pc_wrap -->
 </template>
 <script>
-// import echarts from 'echarts'
 import 'echarts/map/js/china' //引入中国地图
+//引入jsonp 跨域请求数据(只适用get请求)
+import { getCurrCity } from '@/jsonp/getCurrentCity'
 
 //指定图表与数据
 let option = {
@@ -20,9 +21,6 @@ let option = {
          color:'#666'
       }
    },
-   tootip:{
-      trigger:'axis'
-   },
    legend:{
       data:['']
    },
@@ -32,42 +30,54 @@ let option = {
       //地图 : {a}（系列名称），{b}（区域名称），{c}（合并数值）, {d}（无） 提示数据
       formatter:'地区 : {b}<br/>确诊 : {c}'
    },
+   grid:{
+      left:'3%',
+      right:'4%',
+      bottom:'3%',
+      containLabel:true
+   },
+   toolbox:{ //下载疫情地图的图片
+      feature:{
+         saveAsImage:{}
+      }
+   },
    series:[ //对应的数据
       {
          type:'map', //加载图表的类型
          map:'china', //加载的地图
-         data:[ //后端载入数据
-            {name:'北京',value:200},
-            {name:'湖北',value:230},
-            {name:'湖南',value:7000},
-            {name:'江西',value:150},
-            {name:'上海',value:30000},
-            {name:'广东',value:150},
-            {name:'重庆',value:150},
-            {name:'四川',value:150},
-            {name:'广西',value:150},
-            {name:'福建',value:1500},
-            {name:'贵州',value:150},
-            {name:'山东',value:6400},
-            {name:'山西',value:150},
-            {name:'河北',value:48000},
-            {name:'天津',value:20000},
-            {name:'江苏',value:150},
-            {name:'浙江',value:15000},
-            {name:'安徽',value:150},
-            {name:'辽宁',value:150},
-            {name:'吉林',value:10000},
-            {name:'陕西',value:3000},
-            {name:'黑龙江',value:5000},
-            {name:'内蒙古',value:150},
-            {name:'甘肃',value:150},
-            {name:'青海',value:150},
-            {name:'河南',value:40000},
-            {name:'新疆',value:36000},
-            {name:'西藏',value:30000},
-            {name:'云南',value:18000},
-            {name:'台湾',value:5000},
-         ],
+         //后端载入数据
+         // data:[ 
+         //    {name:'北京',value:200},
+         //    {name:'湖北',value:230},
+         //    {name:'湖南',value:7000},
+         //    {name:'江西',value:150},
+         //    {name:'上海',value:30000},
+         //    {name:'广东',value:150},
+         //    {name:'重庆',value:150},
+         //    {name:'四川',value:150},
+         //    {name:'广西',value:150},
+         //    {name:'福建',value:1500},
+         //    {name:'贵州',value:150},
+         //    {name:'山东',value:6400},
+         //    {name:'山西',value:150},
+         //    {name:'河北',value:48000},
+         //    {name:'天津',value:20000},
+         //    {name:'江苏',value:150},
+         //    {name:'浙江',value:15000},
+         //    {name:'安徽',value:150},
+         //    {name:'辽宁',value:150},
+         //    {name:'吉林',value:10000},
+         //    {name:'陕西',value:3000},
+         //    {name:'黑龙江',value:5000},
+         //    {name:'内蒙古',value:150},
+         //    {name:'甘肃',value:150},
+         //    {name:'青海',value:150},
+         //    {name:'河南',value:40000},
+         //    {name:'新疆',value:36000},
+         //    {name:'西藏',value:30000},
+         //    {name:'云南',value:18000},
+         //    {name:'台湾',value:5000},
+         // ],
          label:{ //展示地图标签
             show:true, 
             color:'#0000ff',
@@ -155,28 +165,43 @@ let option02 = {
 
 export default {
    props:{
-      //父层传入疫情数据
-      mapData:{
-         type:Array
-      }
+      //父层chinaMap传入疫情数据
+      // mapData:{
+      //    type:Array
+      // }
    },
    data(){
       return{
-          
+          myChart:''
       }
    },
     mounted(){ //DOM载入完成 调用
       //初始化echarts实例
-      let myChart = this.$echarts.init(document.getElementById('chart'),'light');
+      this.myChart = this.$echarts.init(document.getElementById('chart'),'light');
       let myChart02 = this.$echarts.init(document.getElementById('chart_line'),'light');
 
       //预设使用option数据
-      myChart.setOption(option);
+      // myChart.setOption(option);
       myChart02.setOption(option02);
+      //载入调用疫情数据
+      this._getCurrentCity()
    },
-   methods:{ //https://interface.sina.cn/news/wap/fymap2020_data.d.json?_=1580892522427  疫情数据接口
-      //用jsonP解决跨域问题
-      
+   methods:{ //https://interface.sina.cn/news/wap/fymap2020_data.d.json?_=1580892522427  疫情数据接口 用jsonP解决跨域
+      //获取疫情数据数组
+      _getCurrentCity () {
+         getCurrCity()
+            .then((res) => {
+               // 只获取即时数据里的name及value属性值
+               let list = res.data.list.map(item => {return {name : item.name, value : item.value}})
+               // 动态将list数据给option的data
+               option.series[0].data = list
+               //重新进行绘图
+               this.myChart.setOption(option);
+            })
+            .catch((err) => {
+               console.log(err)
+            })
+    	}
    }
 }
 </script>

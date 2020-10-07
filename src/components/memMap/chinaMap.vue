@@ -15,22 +15,22 @@
                   <el-row class="el_row">
                      <el-col :span="8" class="el-div">
                         <h1 class="topic">
-                              <span class="icon-users"></span>
+                              <span class="icon-star-full"></span>
                               中国疫情地图
                         </h1>
                      </el-col>
                      <el-col :span="16" class="el-div topic_info">
                         <ul>
                               <li>> 功能练习 : 中国疫情地图</li>
-                              <li>> 数据调用 : eCharts套件,</li>
-                              <li>> 使用 : 中国疫情地图</li>
+                              <li>> 数据调用 : eCharts套件,JSONP使用get跨域请求即时数据</li>
+                              <li>> 使用 : JSONP使用get跨域请求即时数据</li>
                         </ul>
                      </el-col>
                   </el-row>
             </el-col>
          </el-row>
          <!-- eCharts 引用地图 -->
-         <Map :mapData="mapData"/>
+         <Map/>
     </div> <!-- end of pc_wrap -->
 </template>
 <script>
@@ -38,8 +38,7 @@
 import Map from './Map.vue'
 //引入封装api接口
 // import { chinaMap } from '@/api/api'
-//引入jsonp 跨域请求数据只适用get请求
-import { getCurrCity } from '@/jsonp/getCurrentCity'
+
 
 export default {
    components:{
@@ -53,21 +52,10 @@ export default {
       }
    },
    methods:{
-      _getCurrentCity () {
-	  	  // 在这里就可以获取到当前城市的接口数据了
-         getCurrCity()
-            .then((res) => {
-               // 打印出获取到的数据
-               this.mapData = res.data.list
-               // console.log(this.mapData)
-            })
-            .catch((err) => {
-               console.log(err)
-            })
-    	}
+      
    },
    mounted(){
-      this._getCurrentCity()
+      
    }
 }
 </script>
