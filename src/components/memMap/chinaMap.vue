@@ -30,12 +30,16 @@
             </el-col>
          </el-row>
          <!-- eCharts 引用地图 -->
-         <Map/>
+         <Map :mapData="mapData"/>
     </div> <!-- end of pc_wrap -->
 </template>
 <script>
 //引入疫情地图组件
 import Map from './Map.vue'
+//引入封装api接口
+// import { chinaMap } from '@/api/api'
+//引入jsonp 跨域请求数据只适用get请求
+import { getCurrCity } from '@/jsonp/getCurrentCity'
 
 export default {
    components:{
@@ -44,13 +48,26 @@ export default {
    data(){
       return{
           content:'',
+          //疫情数据数组
+          mapData:[]
       }
    },
    methods:{
-      
+      _getCurrentCity () {
+	  	  // 在这里就可以获取到当前城市的接口数据了
+         getCurrCity()
+            .then((res) => {
+               // 打印出获取到的数据
+               this.mapData = res.data.list
+               // console.log(this.mapData)
+            })
+            .catch((err) => {
+               console.log(err)
+            })
+    	}
    },
    mounted(){
-
+      this._getCurrentCity()
    }
 }
 </script>

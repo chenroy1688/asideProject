@@ -15,3 +15,6 @@ export const userList = () => get('https://jsonplaceholder.typicode.com/users');
 export const LazyLoadApi = () => get('http://jsonplaceholder.typicode.com/posts');
 //jsonplaceholder分页数据
 export const usersPage = params => get('https://jsonplaceholder.typicode.com/posts/1/comments',{ params : params });
+
+//疫情数据接口
+export const chinaMap = () => get('https://interface.sina.cn/news/wap/fymap2020_data.d.json?_=1580892522427');
