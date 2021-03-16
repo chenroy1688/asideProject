@@ -10,6 +10,7 @@
             <div class="card-text">
                 <router-link :to="{name:'phomeNumber'}">电话</router-link>
                 <router-link :to="{name:'personName'}">网站联系人</router-link>
+                <!-- 电话 网站联系人 content -->
                 <router-view></router-view>
             </div>
          </div>
@@ -30,38 +31,27 @@ export default {
 }
 </script>
 
-<style >
+<style scoped lang="scss">
    .contact_wrap{
       margin:0 0 0 20px;
    }
    .contact_wrap h4{
       font-size:18px;
       color:#d84555;
-      line-height:60px;
    }
    .contact_wrap .mail_info{
       font-size:18px;
       padding:10px;
       background-color:#e2dfdf;
    }
-   .card-text a{
-       display:inline-block;
-       text-align:center;
-       padding:10px;
-       color:#fff;
-       background-color:#999;
-   }
-   .card-text a:hover{
-       background-color:#000;
-   }
-   .card-text a ~ a{ margin-left:10px; }
 
    .card-text div{
       font-size:14px;
-      padding-top:30px;
+      padding:20px;
    }
    .card-text .web_info h1{
       font-size:16px;
+      color:#000;
    }
    .card-text .web_info p{
       color:#999;

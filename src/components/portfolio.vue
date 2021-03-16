@@ -41,28 +41,35 @@
           <el-col :span="24" class="bsss">getters : {{ doneTodesCount }}</el-col>
       </el-row>
 
+      <busDemo></busDemo>
+      <div class="el-div">{{ Foottxt }}</div>
       <!-- 图片 懒加载 载不到图片则载入err.gif -->
       <img class="testImg" v-lazy="imgSrc"/>
   </div>
 </template>
 
 <script>
+//组件
+import busDemo from './slot/busDemo.vue'
 //引入mapState
 import { mapActions, mapGetters, mapState, mapMutations } from 'vuex' 
 //引入数据接口
 import { userList } from '@/api/api'
+//同层vue先建立bus实例 透过bus传值
+import { bus } from '../bus.js' 
 
 export default {
+  components: {
+      busDemo
+  },
   data() {
     return {
       portTxt: "这是优惠讯息page",
       show: true,
       imgSrc:'../static/kobe.jpg',
-      userData:[]
+      userData:[],
+      Foottxt:''
     };
-  },
-  components: {
-
   },
   computed: {
     ...mapState( //数组 对应store传出的数据
@@ -77,7 +84,10 @@ export default {
       userList()
         .then(res => {
           this.userData = res.data
-        })
+        }),
+      bus.$on('chgDemo',(data) => {
+        this.Foottxt = data;
+      })
   },
   methods:{
     del(index){ //删除数据

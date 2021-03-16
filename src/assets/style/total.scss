@@ -56,7 +56,8 @@ $marginTop:var(--main-margin30) 0;
   --main-grayd3-color:#d3d3cf;
   
   /* padding_margin setting */
-  --main-padding15:20px;
+  --main-padding20:20px;
+  --main-padding25:0 20px;
   --main-padding30:30px;
 
   --main-margin20:20px;
@@ -111,7 +112,7 @@ html, body { min-height: 100%;}
           width:200px;
           color:#fff;
           border:1px solid #999;
-          background-color:#333;
+          background-color:#333 !important;
       }
   }
   h3{
@@ -137,9 +138,6 @@ a{
   color:#d74554;
   border:1px solid var(--main-grayd3-color);
 }
-.contact_info h1{
-  color:#d74554;
-}
 
 button{
   padding:10px 6px;
@@ -147,7 +145,6 @@ button{
   font-size:14px;
   text-align:center;
   border-style:none;
-  // background-color:#000;
   border-radius: 4px;
   cursor: pointer;
   overflow:hidden;
@@ -424,10 +421,13 @@ body{
 .card-body h4 span{
   margin:0 15px 0 0;
 }
+.card-body h4{
+  padding:20px 0;
+}
 .card-body .card-text a{
    display:inline-block;
    text-align:center;
-   padding:10px;
+   padding:15px 25px;
    color:#fff;
    background-color:#999;
 }
@@ -435,7 +435,7 @@ body{
    background-color:#000;
 }
 .card-body .card-text a ~ a{ 
-  margin-left:10px; 
+  border-left:1px solid #fff;
 }
 .card-body p.card-text{
   color:#666;

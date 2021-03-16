@@ -88,10 +88,10 @@ module.exports = [
     arrow:'▶',
     subItems: [
             {
-                name: '会员地图功能',
-                href:'/forecast',
+                name: '中國疫情地圖',
+                href:'/chinaMap',
                 icon:'icon-video',
-                componentName: 'TodoList'
+                componentName: 'chinaMap'
             }, 
             {
                 name: '会员地图功能',

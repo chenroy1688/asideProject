@@ -9,32 +9,34 @@
                     <span>contact Us</span>
                 </el-col>
             </el-row>
+
             <!-- 选单区 -->
             <div class="col-3">
-                <div class="contact_top">｜ 选单列表 ｜</div>
+                <div class="contact_top" style="color:white; background-color:red;">｜ 选单列表 ｜</div>
                 <!-- 島航 -->
                  <div class="list-group mb-5">
                     <router-link tag="li" class="nav-link" :to="{name:'contactLink'}">
-                        <a class="list-group-item list-group-item-action">联系我们</a>
+                        <a class="list-group-item list-group-item-action">联系音速直播</a>
                     </router-link>
                 </div>
                 <div class="list-group mb-5">
                     <router-link tag="li" class="nav-link" :to="{name:'historyLink'}">
-                        <a class="list-group-item list-group-item-action">历史订单</a>
+                        <a class="list-group-item list-group-item-action">免责声明</a>
                     </router-link>
                 </div>
                 <div class="list-group mb-5">
                     <router-link tag="li" class="nav-link" :to="{name:'OrderingGuldeLink'}">
-                        <a class="list-group-item list-group-item-action">点单文件</a>
+                        <a class="list-group-item list-group-item-action">隐私政策</a>
                     </router-link>
                 </div>
                 <div class="list-group mb-5">
                     <router-link tag="li" class="nav-link" :to="{name:'deliveryLink'}">
-                        <a class="list-group-item list-group-item-action">详细信习</a>
+                        <a class="list-group-item list-group-item-action">网站地图</a>
                     </router-link>
                 </div>
             </div>
-            <!-- 島航所對应的內容 -->
+
+            <!-- 右侧 content -->
             <div class="col-7">
                 <router-view></router-view>
             </div>
@@ -59,6 +61,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.bos{
+    border:1px solid #ff0000;
+}
 .col-3{
     float: left;
     width:25%;
@@ -66,8 +71,8 @@ export default {
 .col-7{
     float: right;
     width:75%;
-    padding:var(--main-padding15);
-    border:1px solid var(--main-grayd3-color);
+    padding:var(--main-padding25);
+    // border:1px solid var(--main-grayd3-color);
 }
 
 .fade-enter-active, .fade-leave-active {

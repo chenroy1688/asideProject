@@ -48,8 +48,8 @@
                     </ul>
                 </el-col>
             </el-row>
-
-            <div>{{ Foottxt }}</div>
+            <!-- 接收同层数据 -->
+            <div class="el_div">{{ Foottxt }}</div>
         </div>
 </template>
 
@@ -78,7 +78,6 @@ export default {
       }
    },
     created(){ //dom还没载入就运行
-
       //sportgame.vue 傳送过来的数据
       bus.$on('chgThesame',(data) => {
           this.Foottxt = data

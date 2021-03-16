@@ -8,9 +8,11 @@ import ElementUI, { Header } from 'element-ui' //导入element-Ui
 import Mock from './mock' //导入mock.js
 import Icon from 'vue-awesome/components/Icon'
 //引入store储存库
-import store from './store/store'
+import store from './store'
 //引入懒加载
 import VueLazyload from 'vue-lazyload' 
+//引入echarts图表
+import echarts from 'echarts'
 
 //引入css
 import './assets/css/reset.css' //css reset
@@ -45,6 +47,8 @@ Vue.use(VueLazyload,{
   error:'../../static/icons/err.gif', //加载图片错误
   loading:'../../static/icons/loading.gif' //加载中显示图
 })
+//全局定义echarts
+Vue.prototype.$echarts = echarts
 
 // 将axios绑定给$axios属性(全局注册axios)
 // axios.defaults.baseURL = 'localhost:8080'
@@ -56,9 +60,9 @@ const router = new Router({
   mode: 'history' //采用历史模式 网址路径不用hash
 })
 
-//未登入则导向 /login 登入page
+//全局登入导航守卫
 router.beforeEach((to, from, next) => {
-  //取localstorage value
+  //取localstorage value(模拟登入数据)
   const isLogin = localStorage.getItem('token') == 'ImLogin'
 
   /* 路由发生变化修改页面title to为前往的目标页 */
@@ -77,8 +81,6 @@ router.beforeEach((to, from, next) => {
       next(); 
   }
 });
-
-//全域引入mixin
 
 Vue.config.productionTip = false
 
