@@ -1,6 +1,10 @@
 //vue.config.js
 module.exports = {
-  publicPath:'/', //解决打包出现空白
+  //解决打包出现空白
+  // publicPath:'/', 
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/eric-project/'
+    : '/',
   // requireModuleExtension: false,  //去掉文件名的 .module
   css: {  
     loaderOptions:{
