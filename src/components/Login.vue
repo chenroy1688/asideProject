@@ -26,7 +26,7 @@ export default {
           userName:'', //帐号
           password:'', //密码
           isLogin: true,
-          nameText: '音速直播 / LOGIN'
+          nameText: '音速體育直播 / LOGIN'
       }
    },
    methods:{
